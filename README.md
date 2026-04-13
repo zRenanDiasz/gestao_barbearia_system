@@ -14,6 +14,13 @@ Sistema desenvolvido para auxiliar na gestão de uma barbearia, reunindo em um s
 - Controle de estoque
 - Relatórios operacionais e financeiros
 
+## Demonstração
+
+![Agenda](screenshots/Agenda.PNG)
+![Pagamento](screenshots/financeiro.PNG)
+![Relatórios](screenshots/estoque.PNG)
+![Estoque](screenshots/relatorio.PNG)
+
 ## Tecnologias utilizadas
 
 - Python
