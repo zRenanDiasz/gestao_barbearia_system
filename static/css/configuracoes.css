@@ -1,0 +1,212 @@
+/* =========================
+   CONFIGURAÇÕES
+========================= */
+
+.cfg-tabs {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0 16px;
+}
+
+.cfg-tab {
+    border: 1px solid #e6e8ee;
+    background: #fff;
+    color: #111827;
+    border-radius: 999px;
+    padding: 10px 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.cfg-tab:hover {
+    background: #f9fafb;
+}
+
+.cfg-tab.is-active {
+    background: #0f172a;
+    color: #fff;
+    border-color: #0f172a;
+}
+
+.cfg-panel {
+    display: none;
+}
+
+.cfg-panel.is-active {
+    display: block;
+}
+
+.cfg-card {
+    background: #fff;
+    border: 1px solid #e6e8ee;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    margin-bottom: 16px;
+}
+
+.cfg-card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.cfg-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #eef2ff;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+}
+
+.cfg-card-head h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.cfg-card-head p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: #64748b;
+}
+
+.cfg-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cfg-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.cfg-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 6px;
+}
+
+.cfg-field input {
+    width: 100%;
+    border: 1px solid #e6e8ee;
+    border-radius: 12px;
+    padding: 12px 12px;
+    font-size: 14px;
+    outline: none;
+    background: #fff;
+}
+
+.cfg-field input:focus {
+    border-color: #ff7a00;
+    box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.15);
+}
+
+.cfg-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+/* =========================
+   Horários
+========================= */
+
+.cfg-horarios-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cfg-row {
+    display: grid;
+    grid-template-columns: 220px 1fr 1fr 64px;
+    align-items: center;
+    gap: 12px;
+    background: #f8fafc;
+    border: 1px solid #e6e8ee;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.cfg-dia {
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.cfg-time {
+    width: 100%;
+    border: 1px solid #e6e8ee;
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 14px;
+    background: #fff;
+    outline: none;
+}
+
+.cfg-time:focus {
+    border-color: #ff7a00;
+    box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.15);
+}
+
+/* Toggle */
+.cfg-toggle {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cfg-switch {
+    position: relative;
+    width: 46px;
+    height: 26px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.cfg-switch::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 999px;
+    transition: 0.2s ease;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.cfg-switch.is-on {
+    background: #0f172a;
+}
+
+.cfg-switch.is-on::after {
+    transform: translateX(20px);
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+    .cfg-grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .cfg-row {
+        grid-template-columns: 1fr;
+    }
+
+    .cfg-toggle {
+        justify-content: flex-start;
+    }
+}

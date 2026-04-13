@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Configurações | Estetica Barbearia</title>
+
+    <!-- CSS base -->
+    <link rel="stylesheet" href="/static/css/reset.css" />
+    <link rel="stylesheet" href="/static/css/base.css" />
+    <link rel="stylesheet" href="/static/css/layout.css" />
+
+    <!-- CSS da tela -->
+    <link rel="stylesheet" href="/static/css/configuracoes.css" />
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- SIDEBAR (padrão novo) -->
+        <aside class="sidebar sidebar--dark">
+            <!-- Brand / Header -->
+            <div class="sidebar-brand">
+                <div class="brand-icon" aria-hidden="true">✂</div>
+                <div class="brand-text">
+                    <div class="brand-title">Estetica Barbearia</div>
+                    <div class="brand-subtitle">DataraX</div>
+                </div>
+            </div>
+
+            <!-- Menu -->
+            <nav class="sidebar-menu" id="sidebar-menu">
+                <a href="/agenda-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📅</span>
+                    <span>Agenda</span>
+                </a>
+
+                <!-- GROUP: Cadastros -->
+                <div class="menu-group" data-group="cadastros">
+                    <button type="button" class="menu-group-btn" data-toggle="menu-group" aria-expanded="false">
+                        <span class="menu-ico" aria-hidden="true">👤</span>
+                        <span>Cadastros</span>
+                        <span class="mi-chevron" aria-hidden="true">▾</span>
+                    </button>
+
+                    <div class="menu-sub">
+                        <a href="/clientes-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">👥</span>
+                            <span>Clientes</span>
+                        </a>
+                        <a href="/profissionais-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">🧑</span>
+                            <span>Profissionais</span>
+                        </a>
+                        <a href="/servicos-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">✂️</span>
+                            <span>Serviços</span>
+                        </a>
+
+                        <a href="/planos-page" class="menu-item">
+                            <span class="menu-ico" aria-hidden="true">🧾</span>
+                            <span>Planos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/financeiro-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">$</span>
+                    <span>Financeiro</span>
+                </a>
+
+                <a href="/estoque-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📦</span>
+                    <span>Estoque</span>
+                </a>
+
+                <a href="/relatorios-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📊</span>
+                    <span>Relatórios</span>
+                </a>
+
+                <a href="/configuracoes-page" class="menu-item active">
+                    <span class="menu-ico" aria-hidden="true">⚙️</span>
+                    <span>Configurações</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+
+            <!-- HEADER -->
+            <header class="page-header">
+                <div>
+                    <h1>Configurações</h1>
+                    <p>Preferências e configurações do sistema</p>
+                </div>
+            </header>
+
+            <!-- TABS -->
+            <section class="cfg-tabs">
+                <button type="button" class="cfg-tab is-active" data-tab="geral">Geral</button>
+                <button type="button" class="cfg-tab" data-tab="horarios">Horários</button>
+            </section>
+
+            <!-- ABA: GERAL -->
+            <section class="cfg-panel is-active" id="tab-geral">
+                <div class="cfg-card">
+                    <div class="cfg-card-head">
+                        <div class="cfg-icon">🏛️</div>
+                        <div>
+                            <h2>Informações da Barbearia</h2>
+                            <p>Configure os dados do estabelecimento</p>
+                        </div>
+                    </div>
+
+                    <form id="form-geral" class="cfg-form">
+                        <div class="cfg-grid-2">
+                            <div class="cfg-field">
+                                <label for="cfg-nome">Nome da Barbearia</label>
+                                <input id="cfg-nome" type="text" placeholder="Ex: BarberShop Premium" />
+                            </div>
+
+                            <div class="cfg-field">
+                                <label for="cfg-telefone">Telefone</label>
+                                <input id="cfg-telefone" type="text" placeholder="(11) 99999-9999" />
+                            </div>
+                        </div>
+
+                        <div class="cfg-field">
+                            <label for="cfg-endereco">Endereço Completo</label>
+                            <input id="cfg-endereco" type="text" placeholder="Rua, número - Bairro, Cidade - UF" />
+                        </div>
+
+                        <div class="cfg-grid-2">
+                            <div class="cfg-field">
+                                <label for="cfg-email">E-mail</label>
+                                <input id="cfg-email" type="email" placeholder="contato@barbershop.com" />
+                            </div>
+
+                            <div class="cfg-field">
+                                <label for="cfg-cnpj">CNPJ</label>
+                                <input id="cfg-cnpj" type="text" placeholder="00.000.000/0001-00" />
+                            </div>
+                        </div>
+
+                        <div class="cfg-actions">
+                            <button type="submit" class="btn-primary">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ABA: HORÁRIOS -->
+            <section class="cfg-panel" id="tab-horarios">
+                <div class="cfg-card">
+                    <div class="cfg-card-head">
+                        <div class="cfg-icon">🕒</div>
+                        <div>
+                            <h2>Horário de Funcionamento</h2>
+                            <p>Configure os horários de atendimento</p>
+                        </div>
+                    </div>
+
+                    <div class="cfg-actions" style="margin-top: 6px;">
+                        <button type="button" class="btn-primary" id="btn-salvar-horarios">Salvar Alterações</button>
+                    </div>
+                </div>
+
+                <div class="cfg-card">
+                    <div id="lista-horarios" class="cfg-horarios-list">
+                        <!-- JS monta os 7 dias aqui -->
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div class="sidebar_user">
+        <span>@DataraX</span>
+        <small>Todos os direitos reservados</small>
+    </div>
+
+    <!-- JS -->
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/ui.js"></script>
+    <script src="/static/js/configuracoes.js"></script>
+</body>
+
+</html>

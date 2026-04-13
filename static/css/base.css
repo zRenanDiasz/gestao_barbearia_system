@@ -1,0 +1,386 @@
+:root {
+    --primary: #dabf84;
+    --primary-dark: #e06f00;
+    --background: #f5f6fa;
+    --sidebar-bg: #1e1e2f;
+    --sidebar-text: #cfd3ec;
+    --white: #ffffff;
+
+    --success: #2ecc71;
+    --warning: #f1c40f;
+    --danger: #e74c3c;
+    --info: #3498db;
+
+    --border: #e0e0e0;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+p {
+    color: #666;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+    background: #fff;
+    color: #111;
+    border: 1px solid #e5e7eb;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background: #f6f6f6;
+}
+
+.search-input {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    width: 260px;
+}
+
+/* =========================
+   CARDS (GLOBAL)
+   -> usado em Agenda/Clientes/Estoque/Profissionais
+========================= */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 14px;
+}
+
+@media (max-width: 1100px) {
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+.card strong {
+    display: block;
+    font-size: 22px;
+    margin-top: 6px;
+    color: #111;
+}
+
+.card small {
+    display: block;
+    margin-top: 6px;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+/* cabeçalho do KPI */
+.kpi-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: #374151;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.kpi-icon {
+    opacity: .9;
+}
+
+.kpi-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    display: inline-block;
+}
+
+.kpi-dot.success {
+    background: var(--success);
+}
+
+.kpi-dot.warning {
+    background: var(--warning);
+}
+
+.kpi-dot.danger {
+    background: var(--danger);
+}
+
+.kpi-dot.info {
+    background: var(--info);
+}
+
+/* =========================
+   MODAL (GLOBAL)
+========================= */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    z-index: 9999;
+}
+
+.modal-overlay.is-open {
+    display: flex;
+}
+
+.modal-box {
+    width: min(720px, 100%);
+    max-height: calc(100vh - 48px);
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .22);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-head h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.modal-head p {
+    margin: 6px 0 0 0;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.modal-x {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    color: #6b7280;
+    padding: 4px 8px;
+}
+
+.modal-body {
+    padding: 18px 20px;
+    overflow: auto;
+}
+
+.modal-foot {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 20px 20px;
+    border-top: 1px solid #eee;
+}
+
+/* =========================
+   FORM (GLOBAL)
+========================= */
+.form-line {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.form-line label {
+    font-size: 13px;
+    color: #374151;
+    font-weight: 600;
+}
+
+.form-line input,
+.form-line select {
+    height: 42px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 0 12px;
+    outline: none;
+    font-size: 14px;
+    background: #fff;
+}
+
+.form-line input:focus,
+.form-line select:focus {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, .18);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+}
+
+@media (max-width: 560px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   PADRÃO GLOBAL DE BOTÕES
+   Cor oficial: #DABF84
+   Coloque no FINAL do base.css
+========================================= */
+
+:root {
+    --btn-gold: #DABF84;
+    --btn-gold-hover: #DABF84;
+    --btn-gold-text: #111827;
+    --btn-gold-border: #DABF84;
+}
+
+/* Botões principais do sistema */
+button,
+.btn-primary,
+.btn-secondary,
+.btn-orange,
+.btn-add,
+.btn-back,
+#rel-atualizar,
+#rel-export-csv,
+#btn-novo-plano,
+#btn-vincular-cliente,
+#btn-cancelar-novo-plano,
+#btn-cancelar-vincular,
+#btn-fechar-novo-plano,
+#btn-fechar-vincular,
+#btn-fechar-renovar,
+#btn-cancelar-renovar,
+#btn-fechar-editar,
+#btn-cancelar-editar,
+.cfg-tab,
+.row-menu-btn,
+.badge-btn {
+    transition: 0.18s ease;
+}
+
+/* Botões sólidos */
+.btn-primary,
+.btn-orange,
+.btn-add,
+#rel-atualizar,
+#rel-export-csv,
+#btn-novo-plano,
+#btn-vincular-cliente,
+button[type="submit"] {
+    background: var(--btn-gold) !important;
+    border: 1px solid var(--btn-gold-border) !important;
+    color: var(--btn-gold-text) !important;
+}
+
+/* Hover dos sólidos */
+.btn-primary:hover,
+.btn-orange:hover,
+.btn-add:hover,
+#rel-atualizar:hover,
+#rel-export-csv:hover,
+#btn-novo-plano:hover,
+#btn-vincular-cliente:hover,
+button[type="submit"]:hover {
+    background: var(--btn-gold-hover) !important;
+    border-color: var(--btn-gold-border) !important;
+    color: var(--btn-gold-text) !important;
+    filter: none !important;
+    opacity: 0.92;
+}
+
+/* Botões secundários também entram no padrão */
+.btn-secondary,
+#btn-cancelar-novo-plano,
+#btn-cancelar-vincular,
+#btn-cancelar-renovar,
+#btn-cancelar-editar,
+.btn-back {
+    background: var(--btn-gold) !important;
+    border: 1px solid var(--btn-gold-border) !important;
+    color: var(--btn-gold-text) !important;
+}
+
+.btn-secondary:hover,
+#btn-cancelar-novo-plano:hover,
+#btn-cancelar-vincular:hover,
+#btn-cancelar-renovar:hover,
+#btn-cancelar-editar:hover,
+.btn-back:hover {
+    background: var(--btn-gold-hover) !important;
+    border-color: var(--btn-gold-border) !important;
+    color: var(--btn-gold-text) !important;
+    filter: none !important;
+    opacity: 0.92;
+}
+
+/* Tabs que funcionam como botão */
+.cfg-tab {
+    background: var(--btn-gold) !important;
+    border: 1px solid var(--btn-gold-border) !important;
+    color: var(--btn-gold-text) !important;
+}
+
+.cfg-tab:hover,
+.cfg-tab.is-active {
+    background: var(--btn-gold-hover) !important;
+    border-color: var(--btn-gold-border) !important;
+    color: var(--btn-gold-text) !important;
+    box-shadow: none !important;
+}
+
+/* Botão pequeno de ação (⋮ etc.) */
+.row-menu-btn:hover,
+.badge-btn:hover {
+    background: var(--btn-gold) !important;
+    border-color: var(--btn-gold-border) !important;
+    color: var(--btn-gold-text) !important;
+}
+
+/* Opções de menu que são clicáveis como botão */
+.row-opt:hover,
+.status-opt:hover,
+.action-menu .am-opt:hover {
+    background: rgba(218, 191, 132, 0.22) !important;
+}
+
+/* Fechar modal (X) continua discreto, mas com hover no padrão */
+.modal-x:hover {
+    background: rgba(218, 191, 132, 0.22) !important;
+    border-radius: 10px;
+}

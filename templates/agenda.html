@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Agenda | Estetica Barbearia</title>
+
+    <!-- Base CSS (shared across screens) -->
+    <link rel="stylesheet" href="/static/css/reset.css" />
+    <link rel="stylesheet" href="/static/css/base.css" />
+    <link rel="stylesheet" href="/static/css/layout.css" />
+
+    <!-- Screen CSS (agenda-specific) -->
+    <link rel="stylesheet" href="/static/css/agenda.css" />
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- Sidebar / Primary navigation -->
+        <!-- SIDEBAR -->
+        <aside class="sidebar sidebar--dark">
+            <!-- Brand / Header -->
+            <div class="sidebar-brand">
+                <div class="brand-icon" aria-hidden="true">✂</div>
+                <div class="brand-text">
+                    <div class="brand-title">Estetica Barbearia</div>
+                    <div class="brand-subtitle">DataraX</div>
+                </div>
+            </div>
+
+            <!-- Menu -->
+            <nav class="sidebar-menu" id="sidebar-menu">
+                <a href="/agenda-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📅</span>
+                    <span>Agenda</span>
+                </a>
+
+                <!-- GROUP: Cadastros -->
+                <div class="menu-group" data-group="cadastros">
+                    <button type="button" class="menu-group-btn" data-toggle="menu-group" aria-expanded="true">
+                        <span class="menu-ico" aria-hidden="true">👤</span>
+                        <span>Cadastros</span>
+                        <span class="mi-chevron" aria-hidden="true">▾</span>
+                    </button>
+
+                    <div class="menu-sub">
+                        <a href="/clientes-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">👥</span>
+                            <span>Clientes</span>
+                        </a>
+                        <a href="/profissionais-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">🧑</span>
+                            <span>Profissionais</span>
+                        </a>
+                        <a href="/servicos-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">✂️</span>
+                            <span>Serviços</span>
+                        </a>
+
+                        <a href="/planos-page" class="menu-item">
+                            <span class="menu-ico" aria-hidden="true">🧾</span>
+                            <span>Planos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/financeiro-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">$</span>
+                    <span>Financeiro</span>
+                </a>
+
+                <a href="/estoque-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📦</span>
+                    <span>Estoque</span>
+                </a>
+
+                <a href="/relatorios-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📊</span>
+                    <span>Relatórios</span>
+                </a>
+
+                <a href="/configuracoes-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">⚙️</span>
+                    <span>Configurações</span>
+                </a>
+            </nav>
+        </aside>
+
+
+        <!-- Main content -->
+        <main class="main-content">
+
+            <!-- Page header (title + actions) -->
+            <header class="page-header">
+                <div>
+                    <h1>Agenda</h1>
+                    <p>Gerencie todos os agendamentos</p>
+                </div>
+
+                <div class="header-actions">
+                    <!-- Search is handled by agenda.js (client-side filtering) -->
+                    <input type="text" placeholder="Buscar clientes, profissionais..." class="search-input" />
+
+                    <!-- Opens the create/edit modal -->
+                    <button class="btn-primary" id="btn-novo-agendamento" type="button">
+                        + Novo Agendamento
+                    </button>
+                </div>
+            </header>
+
+            <!-- Filters (wired in agenda.js) -->
+            <section class="filters">
+                <!-- Date filter (calendar picker).
+                     agenda.js sets default value to today if empty. -->
+                <input id="filtro-data" type="date" />
+
+                <select id="filtro-profissional">
+                    <option value="">Todos os Profissionais</option>
+                </select>
+
+                <select id="filtro-status">
+                    <option value="">Todos os Status</option>
+                    <option value="confirmado">Confirmado</option>
+                    <option value="aguardando">Aguardando</option>
+                </select>
+            </section>
+
+            <!-- KPI cards (rendered in agenda.js) -->
+            <section class="cards">
+                <div class="card">
+                    <span>Total Agendamentos</span>
+                    <strong id="kpi-total">0</strong>
+                    <small>Filtrados</small>
+                </div>
+
+                <div class="card">
+                    <span>Confirmados</span>
+                    <strong id="kpi-confirmados">0</strong>
+                    <small>Filtrados</small>
+                </div>
+
+                <div class="card">
+                    <span>Aguardando</span>
+                    <strong id="kpi-aguardando">0</strong>
+                    <small>Filtrados</small>
+                </div>
+
+                <div class="card highlight">
+                    <span>Faturamento Previsto</span>
+                    <strong id="kpi-faturamento">R$ 0,00</strong>
+                    <small>Total selecionado</small>
+                </div>
+            </section>
+
+            <!-- Appointments table (tbody is replaced by agenda.js) -->
+            <section class="table-section">
+                <table class="agenda-table">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Profissional</th>
+                            <th>Serviço</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Status</th>
+                            <th>Valor</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Filled by agenda.js -->
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Create/Edit modal -->
+    <div class="modal-overlay" id="modal-novo-agendamento">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+
+            <div class="modal-head">
+                <div>
+                    <h2 id="modal-titulo">Novo Agendamento</h2>
+                    <p>Preencha os dados para criar um novo agendamento.</p>
+                </div>
+
+                <button type="button" class="modal-x" id="btn-fechar-modal" aria-label="Fechar">×</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-agendamento">
+
+                    <!-- Client (supports manual typing; optional autocomplete hooks) -->
+                    <div class="form-line">
+                        <label for="cliente_nome">Cliente</label>
+                        <input id="cliente_nome" type="text" placeholder="Digite o nome do cliente" autocomplete="off"
+                            required />
+                        <div class="autocomplete" id="cliente_sugestoes" hidden></div>
+                        <input type="hidden" id="cliente_id" />
+                    </div>
+
+                    <!-- Phone (shown when client_id is empty; handled in agenda.js) -->
+                    <div class="form-line" id="box-telefone" hidden>
+                        <label for="cliente_telefone">Telefone</label>
+                        <input id="cliente_telefone" type="text" placeholder="(DD) 9xxxx-xxxx" />
+                    </div>
+
+                    <div class="form-line">
+                        <label for="profissional">Profissional</label>
+                        <select id="profissional" name="profissional_id" required>
+                            <option value="">Selecione...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-line">
+                        <label for="servico">Serviço</label>
+                        <select id="servico" name="servico_id" required>
+                            <option value="">Selecione...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-line form-split">
+                        <label for="data">Data</label>
+                        <input id="data" name="data" type="date" required />
+
+                        <label for="horario" class="second">Horário</label>
+                        <input id="horario" name="horario" type="time" required />
+                    </div>
+
+                    <div class="form-line">
+                        <label for="valor">Valor</label>
+                        <input id="valor" name="valor" type="text" placeholder="R$ 0,00" readonly />
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-cancelar-modal">Cancelar</button>
+                <button type="submit" class="btn-primary" form="form-agendamento">Criar Agendamento</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="sidebar_user">
+        <span>@DataraX</span>
+        <small>Todos os direitos reservados</small>
+    </div>
+
+    <!-- JS -->
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/agenda.js"></script>
+    <script src="/static/js/ui.js"></script>
+</body>
+
+</html>

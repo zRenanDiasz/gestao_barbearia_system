@@ -1,0 +1,780 @@
+.filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+/* Shared look for filter controls (select + date input) */
+.filters select,
+.filters input[type="date"] {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background-color: var(--white);
+    font-size: 14px;
+    height: 40px;
+    color: inherit;
+}
+
+/* Optional: improves alignment in some browsers */
+.filters input[type="date"] {
+    min-width: 160px;
+}
+
+/* =============================================================================
+   KPI CARDS
+============================================================================= */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.card {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--border);
+}
+
+.card span {
+    font-size: 13px;
+    color: #666;
+}
+
+.card strong {
+    display: block;
+    font-size: 26px;
+    margin: 8px 0;
+}
+
+.card small {
+    font-size: 12px;
+    color: var(--success);
+}
+
+.card.highlight strong {
+    color: var(--success);
+}
+
+/* =============================================================================
+   TABLE
+============================================================================= */
+.table-section {
+    background-color: var(--white);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+}
+
+.agenda-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.agenda-table thead {
+    background-color: #f8f8f8;
+}
+
+.agenda-table th,
+.agenda-table td {
+    padding: 14px 12px;
+    font-size: 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.agenda-table th {
+    font-weight: 600;
+    color: #555;
+}
+
+.agenda-table tbody tr:hover {
+    background-color: #fafafa;
+}
+
+/* =============================================================================
+   STATUS BADGES
+============================================================================= */
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge.success {
+    background-color: rgba(46, 204, 113, 0.15);
+    color: var(--success);
+}
+
+.badge.warning {
+    background-color: rgba(241, 196, 15, 0.2);
+    color: #b7950b;
+}
+
+/* Clickable badge (used to open status dropdown) */
+.badge-btn {
+    border: none;
+    cursor: pointer;
+}
+
+/* Cancelled */
+.badge.danger {
+    background-color: rgba(231, 76, 60, 0.15);
+    color: #c0392b;
+}
+
+/* =============================================================================
+   RESPONSIVENESS
+============================================================================= */
+@media (max-width: 1024px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .agenda-table th:nth-child(3),
+    .agenda-table td:nth-child(3),
+    .agenda-table th:nth-child(8),
+    .agenda-table td:nth-child(8) {
+        display: none;
+    }
+}
+
+/* =============================================================================
+   MODAL (Create/Edit Appointment)
+============================================================================= */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+#modal-novo-agendamento {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 24px;
+}
+
+#modal-novo-agendamento.is-open {
+    display: flex;
+}
+
+#modal-novo-agendamento .modal-box {
+    background: #fff;
+    width: min(720px, 96vw);
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .25);
+    overflow: hidden;
+}
+
+#modal-novo-agendamento .modal-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+#modal-novo-agendamento .modal-head h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+#modal-novo-agendamento .modal-head p {
+    font-size: 13px;
+    color: #666;
+    margin: 6px 0 0;
+}
+
+#modal-novo-agendamento .modal-x {
+    border: 0;
+    background: transparent;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    color: #777;
+}
+
+#modal-novo-agendamento .modal-body {
+    padding: 20px 22px 10px;
+}
+
+#modal-novo-agendamento .form-line {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+#modal-novo-agendamento label {
+    font-size: 13px;
+    color: #444;
+}
+
+#modal-novo-agendamento input,
+#modal-novo-agendamento select {
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    padding: 0 12px;
+    font-size: 14px;
+    background: #fff;
+}
+
+#modal-novo-agendamento input[readonly] {
+    background: #f3f3f3;
+}
+
+#modal-novo-agendamento .form-split {
+    grid-template-columns: 120px 1fr 90px 1fr;
+}
+
+#modal-novo-agendamento .form-split .second {
+    justify-self: end;
+}
+
+#modal-novo-agendamento .modal-foot {
+    padding: 16px 22px;
+    border-top: 1px solid #e7e7e7;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+@media (max-width: 640px) {
+    #modal-novo-agendamento .form-line {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    #modal-novo-agendamento .form-split {
+        grid-template-columns: 1fr;
+    }
+
+    #modal-novo-agendamento .modal-foot {
+        flex-direction: column;
+    }
+
+    #modal-novo-agendamento .modal-foot button {
+        width: 100%;
+    }
+}
+
+/* =============================================================================
+   STATUS DROPDOWN MENU
+============================================================================= */
+.status-menu {
+    position: absolute;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
+    padding: 8px;
+    width: 180px;
+    z-index: 10000;
+}
+
+.status-opt {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 10px 10px;
+    border-radius: 8px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.status-opt:hover {
+    background: #f5f5f5;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot.success {
+    background: var(--success);
+}
+
+.dot.warning {
+    background: var(--warning);
+}
+
+.dot.danger {
+    background: #e74c3c;
+}
+
+/* =============================================================================
+   ROW ACTION MENU (⋮)
+============================================================================= */
+.td-actions {
+    width: 40px;
+    text-align: right;
+}
+
+.row-menu-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 6px 8px;
+    border-radius: 8px;
+}
+
+.row-menu-btn:hover {
+    background: #f1f1f1;
+}
+
+.row-menu {
+    position: absolute;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
+    padding: 6px;
+    width: 160px;
+    z-index: 10000;
+}
+
+.row-opt {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 10px 10px;
+    border-radius: 8px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.row-opt:hover {
+    background: #f5f5f5;
+}
+
+.row-opt.danger {
+    color: #c0392b;
+}
+
+/* =========================
+   MODAL PAGAMENTO (Agenda)
+========================= */
+.pg-modal {
+    width: min(640px, 96vw);
+}
+
+.pg-info {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #111;
+    margin-bottom: 14px;
+}
+
+.pg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 16px;
+}
+
+@media (max-width: 620px) {
+    .pg-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pg-sub {
+    margin-top: 6px;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.pg-divider {
+    height: 1px;
+    background: #eee;
+    margin: 14px 0;
+}
+
+.pg-prod-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.pg-prod-head h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.btn-add {
+    border: 0;
+    cursor: pointer;
+    background: #16a34a;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: 700;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-add:hover {
+    filter: brightness(0.95);
+}
+
+.pg-prod-row {
+    display: grid;
+    grid-template-columns: 1fr 140px;
+    gap: 12px;
+    align-items: end;
+}
+
+@media (max-width: 620px) {
+    .pg-prod-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pg-prod-row select {
+    height: 42px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 0 12px;
+    outline: none;
+}
+
+.pg-qtd {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pg-qtd label {
+    font-size: 13px;
+    color: #374151;
+    font-weight: 600;
+}
+
+.pg-qtd input {
+    height: 42px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 0 12px;
+    outline: none;
+}
+
+.pg-itens {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pg-empty {
+    padding: 10px 12px;
+    border: 1px dashed #e5e7eb;
+    border-radius: 12px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.pg-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 10px 12px;
+    background: #fff;
+}
+
+.pg-item-title {
+    font-weight: 800;
+    color: #111;
+}
+
+.pg-item-sub {
+    margin-top: 2px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.pg-trash {
+    border: 0;
+    background: #f3f4f6;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.pg-trash:hover {
+    background: #e5e7eb;
+}
+
+.pg-commission-box {
+    margin-top: 12px;
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    background: rgba(245, 158, 11, 0.12);
+    border-radius: 12px;
+    padding: 12px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.pg-comm-left strong {
+    display: block;
+    font-size: 14px;
+}
+
+.pg-comm-left small {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.pg-comm-right {
+    font-weight: 900;
+    color: #b45309;
+}
+
+.pg-totals {
+    margin-top: 14px;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    display: grid;
+    gap: 8px;
+}
+
+.pg-total-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #111;
+}
+
+.pg-total-line.big strong {
+    color: #16a34a;
+    font-size: 18px;
+}
+
+/* =============================================================================
+   MODAL ESCOLHA DE PLANO
+============================================================================= */
+.pg-plan-choice {
+    margin-bottom: 14px;
+}
+
+.pg-plan-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.pg-plan-head h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+    color: #111827;
+}
+
+.pg-plan-head p {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.45;
+}
+
+.pg-plan-summary {
+    border: 1px solid #ddd6fe;
+    background: #f5f3ff;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 14px;
+}
+
+.pg-plan-summary-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pg-plan-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ede9fe;
+    color: #7c3aed;
+    font-size: 16px;
+    flex: 0 0 auto;
+}
+
+.pg-plan-title {
+    font-weight: 800;
+    color: #6d28d9;
+    font-size: 16px;
+    margin: 0;
+}
+
+.pg-plan-service {
+    font-size: 13px;
+    color: #8b5cf6;
+    margin-top: 2px;
+    font-weight: 600;
+}
+
+.pg-plan-usage {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+}
+
+.pg-plan-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pg-plan-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 6px;
+    background: #d1d5db;
+    display: inline-block;
+}
+
+.pg-plan-dot.on {
+    background: #8b5cf6;
+}
+
+.pg-plan-usage-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: #7c3aed;
+}
+
+.pg-plan-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+@media (max-width: 620px) {
+    .pg-plan-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+.pg-plan-card {
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 14px;
+    cursor: pointer;
+    transition: .15s ease;
+    text-align: center;
+}
+
+.pg-plan-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .08);
+}
+
+.pg-plan-card--use {
+    border-color: #c4b5fd;
+    background: #faf5ff;
+}
+
+.pg-plan-card--use .pg-plan-card-icon {
+    color: #7c3aed;
+    background: #ede9fe;
+}
+
+.pg-plan-card--use .pg-plan-card-title {
+    color: #6d28d9;
+}
+
+.pg-plan-card--normal .pg-plan-card-icon {
+    color: #6b7280;
+    background: #f3f4f6;
+}
+
+.pg-plan-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin: 0 auto 10px;
+}
+
+.pg-plan-card-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0;
+}
+
+.pg-plan-card-sub {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.35;
+    color: #6b7280;
+}
+
+.pg-plan-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.pg-plan-footer .btn-secondary {
+    min-width: 110px;
+}

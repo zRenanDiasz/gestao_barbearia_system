@@ -1,0 +1,309 @@
+/* TOPBAR */
+.clientes-topbar {
+    display: grid;
+    grid-template-columns: 1fr 220px auto;
+    gap: 12px;
+    align-items: center;
+
+    background: #fff;
+    border: 1px solid #ececf3;
+    border-radius: 14px;
+    padding: 14px;
+    margin-top: 14px;
+}
+
+@media (max-width: 900px) {
+    .clientes-topbar {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Input com ícone */
+.input-icon {
+    position: relative;
+    width: 100%;
+}
+
+.input-icon .icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.input-icon input {
+    width: 100%;
+    height: 44px;
+    padding: 0 12px 0 38px;
+    border: 1px solid #e6e6ef;
+    border-radius: 12px;
+    background: #fff;
+    outline: none;
+}
+
+.input-icon input:focus {
+    border-color: #d6d6e8;
+    box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.12);
+}
+
+/* Select da topbar */
+.clientes-topbar select {
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid #e6e6ef;
+    border-radius: 12px;
+    background: #fff;
+    outline: none;
+}
+
+.clientes-topbar select:focus {
+    border-color: #d6d6e8;
+    box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.12);
+}
+
+/* KPIs */
+.clientes-cards {
+    margin-top: 14px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+@media (max-width: 1100px) {
+    .clientes-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .clientes-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card.kpi {
+    border: 1px solid #ececf3;
+    border-radius: 14px;
+    padding: 16px;
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+}
+
+.kpi-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.card.kpi span {
+    color: #5b5f6b;
+    font-size: 13px;
+}
+
+.card.kpi strong {
+    display: block;
+    font-size: 28px;
+    line-height: 1.1;
+    color: #111318;
+    margin-bottom: 6px;
+}
+
+.card.kpi small {
+    color: #7a7f8a;
+    font-size: 12px;
+}
+
+.kpi-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #f0f0f7;
+    background: #fafafd;
+    font-size: 14px;
+}
+
+/* Bolinhas */
+.kpi-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    display: inline-block;
+}
+
+.kpi-dot.success {
+    background: #2ecc71;
+}
+
+.kpi-dot.info {
+    background: #3b82f6;
+}
+
+.kpi-dot.danger {
+    background: #ef4444;
+}
+
+/* TABELA */
+.table-section {
+    margin-top: 16px;
+}
+
+.clientes-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    border: 1px solid #ececf3;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.clientes-table thead th {
+    text-align: left;
+    font-size: 13px;
+    color: #5b5f6b;
+    font-weight: 600;
+    padding: 14px 14px;
+    border-bottom: 1px solid #f0f0f7;
+    background: #fff;
+}
+
+.clientes-table tbody td {
+    padding: 14px 14px;
+    border-bottom: 1px solid #f5f5fb;
+    vertical-align: middle;
+    color: #111318;
+    font-size: 14px;
+}
+
+.clientes-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* contato (CORRIGIDO: bate com o JS) */
+.contact {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact .ico {
+    width: 28px;
+    height: 28px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: #fafafd;
+    border: 1px solid #f0f0f7;
+}
+
+/* status pill */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid transparent;
+}
+
+.pill.ativo {
+    background: rgba(46, 204, 113, 0.14);
+    color: #178a46;
+    border-color: rgba(46, 204, 113, 0.22);
+}
+
+.pill.inativo {
+    background: rgba(239, 68, 68, 0.12);
+    color: #b42318;
+    border-color: rgba(239, 68, 68, 0.22);
+}
+
+/* contador de visitas (sem inline style no JS) */
+.pill.count {
+    background: #f5f5f5;
+    border: 1px solid #eee;
+    color: #333;
+    font-weight: 700;
+    min-width: 34px;
+    justify-content: center;
+}
+
+/* coluna ações */
+.td-actions {
+    width: 44px;
+    text-align: right;
+}
+
+.row-menu-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1px solid #ececf3;
+    background: #fff;
+    cursor: pointer;
+    display: inline-grid;
+    place-items: center;
+}
+
+.row-menu-btn:hover {
+    background: #fafafd;
+}
+
+/* menu ⋮ */
+.row-menu {
+    position: fixed;
+    z-index: 9999;
+    width: 210px;
+    background: #fff;
+    border: 1px solid #ececf3;
+    border-radius: 12px;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+    padding: 6px;
+}
+
+.row-opt {
+    width: 100%;
+    text-align: left;
+    border: 0;
+    background: transparent;
+    padding: 10px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #111318;
+}
+
+.row-opt:hover {
+    background: #f6f7fb;
+}
+
+.row-opt.danger {
+    color: #b42318;
+}
+
+.row-opt.danger:hover {
+    background: rgba(239, 68, 68, 0.10);
+}
+
+/* Modal confirm (compacto) */
+.modal-confirm-box {
+    max-width: 520px;
+}
+
+/* Garante abertura dos overlays por .is-open (compatível com seu JS) */
+.modal-overlay.is-open {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,317 @@
+/* =========================
+   ESTOQUE - TOPBAR
+========================= */
+.estoque-topbar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 12px 0 18px;
+    flex-wrap: wrap;
+}
+
+.estoque-topbar .input-icon {
+    flex: 1;
+    min-width: 240px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 10px 12px;
+}
+
+.estoque-topbar .input-icon .icon {
+    opacity: .65;
+}
+
+.estoque-topbar .input-icon input {
+    width: 100%;
+    border: 0;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+}
+
+.estoque-topbar select {
+    height: 42px;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 0 12px;
+    background: #fff;
+    min-width: 180px;
+}
+
+#btn-novo-produto-2 {
+    height: 42px;
+}
+
+/* =========================
+   KPI CARDS (padronizado)
+   - Remove conflito com o bloco duplicado
+========================= */
+.cards.estoque-cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin: 16px 0 18px;
+}
+
+.card.kpi {
+    position: relative;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 14px;
+    padding: 16px 18px;
+    min-height: 92px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.kpi-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    color: #666;
+    font-size: 13px;
+}
+
+.kpi-icon {
+    font-size: 16px;
+    opacity: .85;
+}
+
+.kpi-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    display: inline-block;
+}
+
+.kpi-dot.warning {
+    background: #f5a524;
+}
+
+.kpi-dot.danger {
+    background: #e5484d;
+}
+
+.card.kpi strong {
+    display: block;
+    font-size: 26px;
+    margin: 2px 0 2px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.card.kpi small {
+    color: #777;
+    font-size: 12px;
+}
+
+.card.kpi small.warn {
+    color: #f5a524;
+}
+
+.card.kpi small.danger {
+    color: #e5484d;
+}
+
+/* Responsivo (igual padrão das outras telas) */
+@media (max-width: 1100px) {
+    .cards.estoque-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .cards.estoque-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .estoque-topbar select {
+        min-width: 160px;
+    }
+}
+
+/* =========================
+   ALERTA (estoque crítico)
+========================= */
+.estoque-alert {
+    margin: 16px 0;
+    border: 1px solid #f3b0b3;
+    background: #fff3f3;
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.alert-left {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.alert-ico {
+    font-size: 18px;
+    margin-top: 1px;
+}
+
+.estoque-alert h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.estoque-alert p {
+    margin: 2px 0 0;
+    color: #555;
+    font-size: 13px;
+}
+
+.btn-outline {
+    border: 1px solid #f3b0b3;
+    background: #fff;
+    padding: 10px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* =========================
+   TABELA
+========================= */
+.estoque-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.estoque-table thead th {
+    text-align: left;
+    font-size: 13px;
+    color: #666;
+    background: #fafafa;
+    padding: 14px 14px;
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+}
+
+.estoque-table tbody td {
+    padding: 14px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.estoque-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.muted {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+/* =========================
+   STATUS BADGE
+========================= */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.pill.normal {
+    background: #eafff0;
+    color: #1b7f3a;
+}
+
+.pill.baixo {
+    background: #fff3db;
+    color: #a05a00;
+}
+
+.pill.critico {
+    background: #ffe1e3;
+    color: #b42318;
+}
+
+/* =========================
+   MENU ⋮ (row menu)
+========================= */
+.td-actions {
+    width: 44px;
+    text-align: right;
+}
+
+.row-menu-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 6px 8px;
+    border-radius: 10px;
+}
+
+.row-menu-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.row-menu {
+    position: fixed;
+    z-index: 9999;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+    padding: 6px;
+    min-width: 210px;
+}
+
+.row-opt {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    padding: 10px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 14px;
+}
+
+.row-opt:hover {
+    background: #f6f6f6;
+}
+
+/* =========================
+   MODALS (grid helpers)
+   - Reuses your global modal styles (layout/base)
+========================= */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+@media (max-width: 860px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}

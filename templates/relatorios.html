@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Relatórios | Estetica Barbearia</title>
+
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="/static/css/relatorios.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <aside class="sidebar sidebar--dark">
+            <div class="sidebar-brand">
+                <div class="brand-icon" aria-hidden="true">✂</div>
+                <div class="brand-text">
+                    <div class="brand-title">Estetica Barbearia</div>
+                    <div class="brand-subtitle">DataraX</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu" id="sidebar-menu">
+                <a href="/agenda-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📅</span>
+                    <span>Agenda</span>
+                </a>
+
+                <div class="menu-group" data-group="cadastros">
+                    <button type="button" class="menu-group-btn" data-toggle="menu-group" aria-expanded="false">
+                        <span class="menu-ico" aria-hidden="true">👤</span>
+                        <span>Cadastros</span>
+                        <span class="mi-chevron" aria-hidden="true">▾</span>
+                    </button>
+
+                    <div class="menu-sub">
+                        <a href="/clientes-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">👥</span>
+                            <span>Clientes</span>
+                        </a>
+                        <a href="/profissionais-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">🧑</span>
+                            <span>Profissionais</span>
+                        </a>
+                        <a href="/servicos-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">✂️</span>
+                            <span>Serviços</span>
+                        </a>
+
+                        <a href="/planos-page" class="menu-item">
+                            <span class="menu-ico" aria-hidden="true">🧾</span>
+                            <span>Planos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/financeiro-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">$</span>
+                    <span>Financeiro</span>
+                </a>
+
+                <a href="/estoque-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📦</span>
+                    <span>Estoque</span>
+                </a>
+
+                <a href="/relatorios-page" class="menu-item active">
+                    <span class="menu-ico" aria-hidden="true">📊</span>
+                    <span>Relatórios</span>
+                </a>
+
+                <a href="/configuracoes-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">⚙️</span>
+                    <span>Configurações</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1>Relatórios</h1>
+                    <p>Visão geral por período</p>
+                </div>
+            </header>
+
+            <section class="rel-topbar">
+                <div class="rel-filter">
+                    <label>Período</label>
+                    <select id="rel-periodo">
+                        <option value="semana">Esta semana</option>
+                        <option value="este_mes" selected>Este mês</option>
+                        <option value="mes_passado">Mês passado</option>
+                        <option value="ultimos_3_meses">Últimos 3 meses</option>
+                        <option value="este_ano">Este ano</option>
+                        <option value="ultimo_ano">Ano passado</option>
+                    </select>
+                </div>
+
+                <div class="rel-filter">
+                    <label>Profissional</label>
+                    <select id="rel-profissional">
+                        <option value="todos">Todos</option>
+                    </select>
+                </div>
+
+                <button class="btn-primary" id="rel-atualizar" type="button">Atualizar</button>
+
+                <div class="rel-actions">
+                    <button class="btn-secondary" id="rel-export-csv" type="button">Exportar PDF</button>
+                </div>
+            </section>
+
+            <section class="rel-kpis">
+                <div class="rel-card green">
+                    <div class="rel-card-top">
+                        <span>Faturamento Total</span>
+                    </div>
+                    <strong id="kpi-fat">R$ 0,00</strong>
+                    <small id="kpi-periodo-label">—</small>
+                </div>
+
+                <div class="rel-card blue">
+                    <div class="rel-card-top">
+                        <span>Clientes no Período</span>
+                    </div>
+                    <strong id="kpi-clientes">0</strong>
+                    <small>clientes únicos atendidos</small>
+                </div>
+
+                <div class="rel-card purple">
+                    <div class="rel-card-top">
+                        <span>Atendimentos</span>
+                    </div>
+                    <strong id="kpi-atend">0</strong>
+                    <small>concluídos / pagos</small>
+                </div>
+
+                <div class="rel-card amber">
+                    <div class="rel-card-top">
+                        <span>Saldo (Entradas - Saídas)</span>
+                    </div>
+                    <strong id="kpi-saldo">R$ 0,00</strong>
+                    <small id="kpi-saidas">Saídas: R$ 0,00</small>
+                </div>
+            </section>
+
+            <section class="rel-grid-2">
+                <div class="rel-box">
+                    <div class="rel-box-head">
+                        <div>
+                            <h3>Faturamento Mensal</h3>
+                            <p>Últimos 6 meses</p>
+                        </div>
+                    </div>
+                    <div id="box-mensal" class="rel-bars"></div>
+                </div>
+
+                <div class="rel-box">
+                    <div class="rel-box-head">
+                        <div>
+                            <h3>Serviços mais vendidos</h3>
+                            <p id="top-serv-periodo">—</p>
+                        </div>
+                    </div>
+                    <div id="box-top-servicos" class="rel-list"></div>
+                </div>
+            </section>
+
+            <section class="rel-box">
+                <div class="rel-box-head">
+                    <div>
+                        <h3>Top profissionais</h3>
+                        <p>por faturamento no período</p>
+                    </div>
+                </div>
+
+                <div id="box-top-profissionais" class="rel-profs"></div>
+            </section>
+        </main>
+    </div>
+
+    <div class="sidebar_user">
+        <span>@DataraX</span>
+        <small>Todos os direitos reservados</small>
+    </div>
+
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/relatorios.js"></script>
+    <script src="/static/js/ui.js"></script>
+</body>
+
+</html>

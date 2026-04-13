@@ -1,0 +1,280 @@
+/* =========================
+   RELATÓRIOS — TOPBAR (igual padrão dos outros)
+========================= */
+.rel-topbar {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, .08);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin: 12px 0 16px;
+}
+
+.rel-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 190px;
+}
+
+.rel-filter label {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.rel-filter select {
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid rgba(0, 0, 0, .12);
+    border-radius: 10px;
+    background: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+.rel-filter select:focus {
+    border-color: rgba(0, 0, 0, .22);
+}
+
+/* Botão Atualizar fica junto dos filtros */
+#rel-atualizar {
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 10px;
+}
+
+/* Área de ações (direita) */
+.rel-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+/* Botão export */
+#rel-export-csv {
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 10px;
+}
+
+/* =========================
+   KPIs
+========================= */
+.rel-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.rel-card {
+    border: 1px solid rgba(0, 0, 0, .08);
+    border-radius: 14px;
+    padding: 16px;
+    background: #fff;
+}
+
+.rel-card-top span {
+    font-size: 13px;
+    color: #444;
+}
+
+.rel-card strong {
+    display: block;
+    font-size: 28px;
+    margin-top: 10px;
+}
+
+.rel-card small {
+    color: #666;
+    margin-top: 6px;
+    display: block;
+}
+
+/* cores estilo dashboard */
+.rel-card.green {
+    background: linear-gradient(180deg, rgba(46, 204, 113, .12), rgba(46, 204, 113, .06));
+}
+
+.rel-card.blue {
+    background: linear-gradient(180deg, rgba(52, 152, 219, .12), rgba(52, 152, 219, .06));
+}
+
+.rel-card.purple {
+    background: linear-gradient(180deg, rgba(155, 89, 182, .12), rgba(155, 89, 182, .06));
+}
+
+.rel-card.amber {
+    background: linear-gradient(180deg, rgba(241, 196, 15, .16), rgba(241, 196, 15, .06));
+}
+
+/* =========================
+   GRIDS / BOXES
+========================= */
+.rel-grid-2 {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.rel-box {
+    border: 1px solid rgba(0, 0, 0, .08);
+    border-radius: 14px;
+    background: #fff;
+    padding: 14px;
+}
+
+.rel-box-head h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.rel-box-head p {
+    margin: 4px 0 0 0;
+    color: #666;
+    font-size: 13px;
+}
+
+/* =========================
+   BARRAS (Faturamento mensal)
+========================= */
+.rel-bars {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rel-bar {
+    display: grid;
+    grid-template-columns: 90px 1fr 90px;
+    gap: 10px;
+    align-items: center;
+}
+
+.rel-bar .label {
+    color: #333;
+    font-size: 13px;
+}
+
+.rel-bar .track {
+    height: 10px;
+    background: rgba(0, 0, 0, .08);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.rel-bar .fill {
+    height: 100%;
+    background: #16a34a;
+    border-radius: 999px;
+    width: 0%;
+}
+
+.rel-bar .val {
+    text-align: right;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* =========================
+   LISTA (Top serviços)
+========================= */
+.rel-list {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rel-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border: 1px solid rgba(0, 0, 0, .06);
+    border-radius: 12px;
+}
+
+.rel-item .name {
+    font-weight: 600;
+}
+
+.rel-item .meta {
+    color: #666;
+    font-size: 13px;
+}
+
+/* =========================
+   TOP PROFISSIONAIS
+========================= */
+.rel-profs {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.prof-card {
+    border: 1px solid rgba(0, 0, 0, .06);
+    border-radius: 14px;
+    padding: 14px;
+    background: #fff;
+}
+
+.prof-card .nome {
+    font-weight: 700;
+}
+
+.prof-card .line {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    color: #444;
+    font-size: 13px;
+}
+
+.prof-card .total {
+    color: #0a7a2a;
+    font-weight: 800;
+}
+
+/* =========================
+   RESPONSIVO (igual padrão)
+========================= */
+@media (max-width: 1100px) {
+    .rel-kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .rel-grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .rel-profs {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .rel-filter {
+        min-width: 100%;
+    }
+
+    .rel-actions {
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    #rel-atualizar,
+    #rel-export-csv {
+        width: 100%;
+    }
+}

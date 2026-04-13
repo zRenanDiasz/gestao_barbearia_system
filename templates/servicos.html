@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Serviços | Estetica Barbearia</title>
+
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="/static/css/servicos.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- SIDEBAR (padrão novo) -->
+        <aside class="sidebar sidebar--dark">
+            <div class="sidebar-brand">
+                <div class="brand-icon" aria-hidden="true">✂</div>
+                <div class="brand-text">
+                    <div class="brand-title">Estetica Barbearia</div>
+                    <div class="brand-subtitle">DataraX</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu" id="sidebar-menu">
+                <a href="/agenda-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📅</span>
+                    <span>Agenda</span>
+                </a>
+
+                <!-- GROUP: Cadastros -->
+                <div class="menu-group" data-group="cadastros">
+                    <button type="button" class="menu-group-btn" data-toggle="menu-group" aria-expanded="false">
+                        <span class="menu-ico" aria-hidden="true">👤</span>
+                        <span>Cadastros</span>
+                        <span class="mi-chevron" aria-hidden="true">▾</span>
+                    </button>
+
+                    <div class="menu-sub">
+                        <a href="/clientes-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">👥</span>
+                            <span>Clientes</span>
+                        </a>
+                        <a href="/profissionais-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">🧑</span>
+                            <span>Profissionais</span>
+                        </a>
+                        <a href="/servicos-page" class="menu-item sub-item active">
+                            <span class="menu-ico" aria-hidden="true">✂️</span>
+                            <span>Serviços</span>
+                        </a>
+
+                        <a href="/planos-page" class="menu-item">
+                            <span class="menu-ico" aria-hidden="true">🧾</span>
+                            <span>Planos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/financeiro-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">$</span>
+                    <span>Financeiro</span>
+                </a>
+
+                <a href="/estoque-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📦</span>
+                    <span>Estoque</span>
+                </a>
+
+                <a href="/relatorios-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📊</span>
+                    <span>Relatórios</span>
+                </a>
+
+                <a href="/configuracoes-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">⚙️</span>
+                    <span>Configurações</span>
+                </a>
+            </nav>
+
+        </aside>
+
+        <!-- CONTEÚDO -->
+        <main class="main-content">
+
+            <header class="page-header">
+                <div>
+                    <h1>Serviços</h1>
+                    <p>Catálogo de serviços oferecidos</p>
+                </div>
+            </header>
+
+            <!-- TOPBAR -->
+            <section class="servicos-topbar">
+                <div class="input-pill">
+                    <span class="icon" aria-hidden="true">🔎</span>
+                    <input id="busca-servicos" type="text" placeholder="Buscar serviços..." />
+                </div>
+
+                <select id="filtro-categoria" class="select-pill">
+                    <option value="">Todas as Categorias</option>
+                </select>
+
+                <select id="filtro-status" class="select-pill">
+                    <option value="todos">Todos os Status</option>
+                    <option value="ativo">Somente Ativos</option>
+                    <option value="inativo">Somente Inativos</option>
+                </select>
+
+                <button class="btn-primary btn-orange" id="btn-novo-servico" type="button">
+                    + Novo Serviço
+                </button>
+            </section>
+
+            <!-- KPIs -->
+            <section class="cards servicos-cards">
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Total de Serviços</span>
+                        <span class="kpi-icon">✂️</span>
+                    </div>
+                    <strong id="kpi-total-servicos">0</strong>
+                    <small id="kpi-total-categorias">0 categorias</small>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Serviços Ativos</span>
+                        <span class="kpi-dot success"></span>
+                    </div>
+                    <strong id="kpi-ativos">0</strong>
+                    <small id="kpi-ativos-pct">—</small>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Mais Vendido</span>
+                        <span class="kpi-dot info"></span>
+                    </div>
+                    <strong id="kpi-mais-vendido-nome">—</strong>
+                    <small id="kpi-mais-vendido-qtde">—</small>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Serviços Inativos</span>
+                        <span class="kpi-dot danger"></span>
+                    </div>
+                    <strong id="kpi-inativos">0</strong>
+                    <small>Desativados</small>
+                </div>
+            </section>
+
+            <!-- TABELA -->
+            <section class="table-section">
+                <table class="servicos-table">
+                    <thead>
+                        <tr>
+                            <th>Serviço</th>
+                            <th>Descrição</th>
+                            <th>Categoria</th>
+                            <th>Duração</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-servicos"></tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MODAL SERVIÇO (criar/editar) -->
+    <div class="modal-overlay" id="modal-servico">
+        <div class="modal-box" role="dialog" aria-modal="true">
+            <div class="modal-head">
+                <div>
+                    <h2 id="titulo-modal-servico">Novo Serviço</h2>
+                    <p id="subtitulo-modal-servico">Preencha os dados para cadastrar.</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-servico">×</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-servico">
+                    <div class="form-line">
+                        <label for="s-nome">Nome</label>
+                        <input id="s-nome" type="text" placeholder="Ex: Corte Tradicional" required />
+                    </div>
+
+                    <div class="form-line">
+                        <label for="s-descricao">Descrição</label>
+                        <input id="s-descricao" type="text" placeholder="Opcional: descreva rapidamente" />
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-line">
+                            <label for="s-categoria">Categoria</label>
+                            <input id="s-categoria" type="text" placeholder="Ex: Corte / Barba / Combo" />
+                        </div>
+
+                        <div class="form-line">
+                            <label for="s-duracao">Duração (min)</label>
+                            <input id="s-duracao" type="number" min="1" step="1" placeholder="Ex: 30" required />
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-line">
+                            <label for="s-preco">Preço (R$)</label>
+                            <input id="s-preco" type="number" min="0" step="0.01" placeholder="Ex: 50.00" required />
+                        </div>
+
+                        <div class="form-line">
+                            <label for="s-ativo">Status</label>
+                            <select id="s-ativo">
+                                <option value="1">Ativo</option>
+                                <option value="0">Inativo</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-cancelar-servico">Cancelar</button>
+                <button type="submit" class="btn-primary" form="form-servico" id="btn-salvar-servico">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CONFIRM (ações) -->
+    <div class="modal-overlay" id="modal-confirm" aria-hidden="true">
+        <div class="modal-box modal-confirm-box" role="dialog" aria-modal="true">
+            <div class="modal-head">
+                <div>
+                    <h2 id="confirm-title">Confirmar ação</h2>
+                    <p id="confirm-msg">—</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-confirm" aria-label="Fechar">×</button>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-confirm-nao">Cancelar</button>
+                <button type="button" class="btn-primary" id="btn-confirm-sim">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL INFO (erros/validações) -->
+    <div class="modal-overlay" id="modal-info" aria-hidden="true">
+        <div class="modal-box modal-confirm-box" role="dialog" aria-modal="true">
+            <div class="modal-head">
+                <div>
+                    <h2 id="info-title">Aviso</h2>
+                    <p id="info-msg">—</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-info" aria-label="Fechar">×</button>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-primary" id="btn-info-ok">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar_user">
+        <span>@DataraX</span>
+        <small>Todos os direitos reservados</small>
+    </div>
+
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/servicos.js"></script>
+    <script src="/static/js/ui.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Profissionais | Estetica Barbearia</title>
+
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="/static/css/profissionais.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- SIDEBAR (padrão novo) -->
+        <aside class="sidebar sidebar--dark">
+            <div class="sidebar-brand">
+                <div class="brand-icon" aria-hidden="true">✂</div>
+                <div class="brand-text">
+                    <div class="brand-title">Estetica Barbearia</div>
+                    <div class="brand-subtitle">DataraX</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu" id="sidebar-menu">
+                <a href="/agenda-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📅</span>
+                    <span>Agenda</span>
+                </a>
+
+                <!-- GROUP: Cadastros -->
+                <div class="menu-group" data-group="cadastros">
+                    <button type="button" class="menu-group-btn" data-toggle="menu-group" aria-expanded="false">
+                        <span class="menu-ico" aria-hidden="true">👤</span>
+                        <span>Cadastros</span>
+                        <span class="mi-chevron" aria-hidden="true">▾</span>
+                    </button>
+
+                    <div class="menu-sub">
+                        <a href="/clientes-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">👥</span>
+                            <span>Clientes</span>
+                        </a>
+                        <a href="/profissionais-page" class="menu-item sub-item active">
+                            <span class="menu-ico" aria-hidden="true">🧑</span>
+                            <span>Profissionais</span>
+                        </a>
+                        <a href="/servicos-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">✂️</span>
+                            <span>Serviços</span>
+                        </a>
+
+                        <a href="/planos-page" class="menu-item">
+                            <span class="menu-ico" aria-hidden="true">🧾</span>
+                            <span>Planos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/financeiro-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">$</span>
+                    <span>Financeiro</span>
+                </a>
+
+                <a href="/estoque-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📦</span>
+                    <span>Estoque</span>
+                </a>
+
+                <a href="/relatorios-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📊</span>
+                    <span>Relatórios</span>
+                </a>
+
+                <a href="/configuracoes-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">⚙️</span>
+                    <span>Configurações</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- CONTEÚDO -->
+        <main class="main-content">
+
+            <header class="page-header">
+                <div>
+                    <h1>Profissionais</h1>
+                    <p>Gerenciamento da equipe</p>
+                </div>
+            </header>
+
+            <!-- TOPBAR -->
+            <section class="prof-topbar">
+                <div class="input-icon">
+                    <span class="icon">🔎</span>
+                    <input id="busca-profissionais" type="text" placeholder="Buscar profissionais..." />
+                </div>
+
+                <select id="filtro-status">
+                    <option value="">Todos os Status</option>
+                    <option value="ativo">Ativo</option>
+                    <option value="inativo">Inativo</option>
+                </select>
+
+                <button class="btn-primary" id="btn-novo-profissional" type="button">+ Novo Profissional</button>
+            </section>
+
+            <!-- KPIs -->
+            <section class="cards prof-cards">
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Total Profissionais</span>
+                        <span class="kpi-icon">👤</span>
+                    </div>
+                    <strong id="kpi-total">0</strong>
+                    <small>cadastros</small>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Ativos Hoje</span>
+                        <span class="kpi-dot success"></span>
+                    </div>
+                    <strong id="kpi-ativos-hoje">0</strong>
+                    <small id="kpi-ativos-pct">—</small>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Agendamentos Hoje</span>
+                        <span class="kpi-icon">📅</span>
+                    </div>
+                    <strong id="kpi-ag-hoje">0</strong>
+                    <small>no dia</small>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Inativos</span>
+                        <span class="kpi-dot danger"></span>
+                    </div>
+                    <strong id="kpi-inativos">0</strong>
+                    <small>desativados</small>
+                </div>
+            </section>
+
+            <!-- TABELA -->
+            <section class="table-section">
+                <table class="prof-table">
+                    <thead>
+                        <tr>
+                            <th>Profissional</th>
+                            <th>Contato</th>
+                            <th>Dias de Trabalho</th>
+                            <th>Horário</th>
+                            <th>Agend. Hoje</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-profissionais"></tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MODAL PROFISSIONAL (criar/editar) -->
+    <div class="modal-overlay" id="modal-profissional">
+        <div class="modal-box" role="dialog" aria-modal="true">
+            <div class="modal-head">
+                <div>
+                    <h2 id="titulo-modal-prof">Novo Profissional</h2>
+                    <p id="subtitulo-modal-prof">Preencha os dados para cadastrar.</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-prof">×</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-prof">
+                    <div class="form-line">
+                        <label for="p-nome">Nome</label>
+                        <input id="p-nome" type="text" placeholder="Nome do profissional" required />
+                    </div>
+
+                    <div class="form-line">
+                        <label for="p-telefone">Telefone</label>
+                        <input id="p-telefone" type="text" placeholder="(DD) 9xxxx-xxxx" required />
+                    </div>
+
+                    <div class="form-line">
+                        <label>Dias de trabalho</label>
+                        <div class="dias-grid" id="dias-grid">
+                            <label class="chk"><input type="checkbox" value="seg"> <span>Seg</span></label>
+                            <label class="chk"><input type="checkbox" value="ter"> <span>Ter</span></label>
+                            <label class="chk"><input type="checkbox" value="qua"> <span>Qua</span></label>
+                            <label class="chk"><input type="checkbox" value="qui"> <span>Qui</span></label>
+                            <label class="chk"><input type="checkbox" value="sex"> <span>Sex</span></label>
+                            <label class="chk"><input type="checkbox" value="sab"> <span>Sáb</span></label>
+                            <label class="chk"><input type="checkbox" value="dom"> <span>Dom</span></label>
+                        </div>
+                        <small class="hint">Ex.: Seg - Sáb (marque os dias que ele atende)</small>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-line">
+                            <label for="p-inicio">Início</label>
+                            <input id="p-inicio" type="time" value="09:00" required />
+                        </div>
+                        <div class="form-line">
+                            <label for="p-fim">Fim</label>
+                            <input id="p-fim" type="time" value="19:00" required />
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-cancelar-prof">Cancelar</button>
+                <button type="submit" class="btn-primary" form="form-prof" id="btn-salvar-prof">Adicionar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FOLGA (bloqueio dia inteiro) -->
+    <div class="modal-overlay" id="modal-folga">
+        <div class="modal-box" role="dialog" aria-modal="true">
+            <div class="modal-head">
+                <div>
+                    <h2>Definir folga</h2>
+                    <p id="folga-sub">—</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-folga">×</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-folga">
+                    <div class="form-line">
+                        <label for="f-data">Data</label>
+                        <input id="f-data" type="date" required />
+                    </div>
+
+                    <div class="form-line">
+                        <label for="f-motivo">Motivo (opcional)</label>
+                        <input id="f-motivo" type="text" placeholder="Ex: consulta / viagem" />
+                    </div>
+
+                    <small class="hint">Isso cria um bloqueio de dia inteiro e impede agendamentos nesse dia.</small>
+                </form>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-cancelar-folga">Cancelar</button>
+                <button type="submit" class="btn-primary" form="form-folga" id="btn-salvar-folga">Salvar folga</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL COMISSÃO -->
+    <div class="modal-overlay" id="modal-comissao" aria-hidden="true">
+        <div class="modal-box" role="dialog" aria-modal="true">
+            <div class="modal-head">
+                <div>
+                    <h2>Atualizar Comissão</h2>
+                    <p id="comissao-sub">—</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-comissao">×</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-comissao">
+                    <div class="form-line">
+                        <label for="c-valor">Comissão (%)</label>
+                        <input id="c-valor" type="number" inputmode="decimal" step="0.01" min="0" max="100"
+                            placeholder="Ex: 30" required />
+                        <small class="hint">A comissão será aplicada somente sobre serviços (não sobre
+                            produtos).</small>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-cancelar-comissao">Cancelar</button>
+                <button type="submit" class="btn-primary" form="form-comissao" id="btn-salvar-comissao">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CONFIRM (remover folga) -->
+    <div class="modal-overlay" id="modal-confirm" aria-hidden="true">
+        <div class="modal-box modal-confirm-box" role="dialog" aria-modal="true">
+            <div class="modal-head">
+                <div>
+                    <h2 id="confirm-title">Confirmar ação</h2>
+                    <p id="confirm-msg">—</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-confirm" aria-label="Fechar">×</button>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-confirm-nao">Cancelar</button>
+                <button type="button" class="btn-primary" id="btn-confirm-sim">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL INFO (mensagens) -->
+    <div class="modal-overlay" id="modal-info" aria-hidden="true">
+        <div class="modal-box modal-confirm-box" role="dialog" aria-modal="true">
+            <div class="modal-head">
+                <div>
+                    <h2 id="info-title">Aviso</h2>
+                    <p id="info-msg">—</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-info" aria-label="Fechar">×</button>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-primary" id="btn-info-ok">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar_user">
+        <span>@DataraX</span>
+        <small>Todos os direitos reservados</small>
+    </div>
+
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/profissionais.js"></script>
+    <script src="/static/js/ui.js"></script>
+</body>
+
+</html>

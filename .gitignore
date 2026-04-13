@@ -1,0 +1,25 @@
+# Ambiente
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Build / executáveis
+build/
+dist/
+*.spec
+*.exe
+*.pkg
+*.zip
+*.toc
+*.pyz
+*.log
+
+# Banco / dados sensíveis
+*.db
+*.sqlite3
+instance/
+
+# Sistema
+.DS_Store
+Thumbs.db

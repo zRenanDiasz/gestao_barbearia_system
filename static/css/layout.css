@@ -1,0 +1,395 @@
+/* static/css/layout.css */
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 240px;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.sidebar-logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--white);
+    margin-bottom: 30px;
+}
+
+.sidebar-menu {
+    flex: 1;
+}
+
+/* itens do menu */
+.menu-item {
+    display: block;
+    padding: 12px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    border-radius: 10px;
+    margin-bottom: 6px;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background-color: rgba(255, 255, 255, 0.10);
+    color: var(--white);
+}
+
+.sidebar-user {
+    font-size: 12px;
+    color: #aaa;
+}
+
+/* CONTEÚDO */
+.main-content {
+    flex: 1;
+    padding: 24px;
+    overflow-x: hidden;
+}
+
+/* HEADER */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* =========================
+   GRUPO: CADASTROS
+========================= */
+.menu-group {
+    margin-bottom: 6px;
+}
+
+.menu-group-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    padding: 12px;
+    border-radius: 10px;
+    color: var(--sidebar-text);
+    font: inherit;
+
+    transition: background .15s ease, color .15s ease;
+}
+
+.menu-group-btn:hover {
+    background-color: rgba(255, 255, 255, 0.10);
+    color: var(--white);
+}
+
+.mi-chevron {
+    opacity: .8;
+    transition: transform .2s ease;
+}
+
+/* submenu */
+.menu-sub {
+    margin-top: 4px;
+    padding-left: 10px;
+    display: none;
+}
+
+.menu-group.is-open .menu-sub {
+    display: block;
+}
+
+.menu-group.is-open .mi-chevron {
+    transform: rotate(180deg);
+}
+
+/* itens internos */
+.sub-item {
+    padding-left: 26px;
+    font-size: 14px;
+    opacity: .95;
+}
+
+/* destaque quando um item interno está ativo:
+   faz o grupo "Cadastros" também ficar com cara de selecionado */
+.menu-group:has(.sub-item.active) .menu-group-btn {
+    background-color: rgba(255, 255, 255, 0.10);
+    color: var(--white);
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+/* TABLET */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .search-input {
+        width: 200px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* se você quiser manter o menu oculto no mobile, ok.
+       mas se ocultar, o Cadastros também some — então deixei como estava. */
+    .sidebar-menu {
+        display: none;
+    }
+
+    .main-content {
+        padding: 16px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .header-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+}
+
+/* ============================================================================
+   SIDEBAR (Dark / Modern)
+   - Drop-in style to match modern admin sidebar
+============================================================================ */
+
+.sidebar--dark {
+    width: 280px;
+    background: #0f1218;
+    color: rgba(255, 255, 255, .92);
+    border-right: 1px solid rgba(255, 255, 255, .06);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+/* Brand block */
+.sidebar--dark .sidebar-brand {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 18px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+
+.sidebar--dark .brand-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: #dabf84;
+    /* orange */
+    color: #111827;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.sidebar--dark .brand-title {
+    font-weight: 700;
+    letter-spacing: .2px;
+}
+
+.sidebar--dark .brand-subtitle {
+    font-size: 12px;
+    opacity: .70;
+    margin-top: 2px;
+}
+
+/* Menu scroll area */
+.sidebar--dark .sidebar-menu {
+    padding: 12px;
+    overflow: auto;
+    flex: 1;
+}
+
+/* Scrollbar (WebKit) */
+.sidebar--dark .sidebar-menu::-webkit-scrollbar {
+    width: 10px;
+}
+
+.sidebar--dark .sidebar-menu::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .10);
+    border-radius: 999px;
+}
+
+.sidebar--dark .sidebar-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Links */
+.sidebar--dark .menu-item,
+.sidebar--dark .menu-group-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: rgba(255, 255, 255, .86);
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 1;
+}
+
+/* Icon column */
+.sidebar--dark .menu-ico {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, .06);
+    font-size: 14px;
+}
+
+/* Hover */
+.sidebar--dark .menu-item:hover,
+.sidebar--dark .menu-group-btn:hover {
+    background: rgba(255, 255, 255, .06);
+}
+
+/* Active item (orange pill) */
+.sidebar--dark .menu-item.active {
+    background: linear-gradient(180deg, #f59e0b, #f97316);
+    color: #111827;
+}
+
+.sidebar--dark .menu-item.active .menu-ico {
+    background: rgba(17, 24, 39, .15);
+}
+
+/* Group */
+.sidebar--dark .menu-group {
+    margin: 6px 0;
+}
+
+.sidebar--dark .menu-group-btn {
+    justify-content: space-between;
+}
+
+.sidebar--dark .menu-group-btn .mi-chevron {
+    opacity: .8;
+    transform: rotate(0deg);
+    transition: transform .15s ease;
+}
+
+/* Sub menu */
+.sidebar--dark .menu-sub {
+    margin-top: 6px;
+    padding-left: 10px;
+    display: block;
+}
+
+.sidebar--dark .sub-item {
+    font-weight: 600;
+    opacity: .88;
+}
+
+/* collapsed state (JS toggles .is-open) */
+.sidebar--dark .menu-group:not(.is-open) .menu-sub {
+    display: none;
+}
+
+.sidebar--dark .menu-group.is-open .menu-group-btn .mi-chevron {
+    transform: rotate(180deg);
+}
+
+/* ============================================================================
+   SIMPLE SIDEBAR OVERRIDES (less flashy / no animations)
+   Paste this at the END of layout.css
+============================================================================ */
+
+/* remove transitions/animations */
+.sidebar--dark .menu-item,
+.sidebar--dark .menu-group-btn,
+.sidebar--dark .mi-chevron {
+    transition: none !important;
+}
+
+/* make hover subtle (or you can remove hover completely) */
+.sidebar--dark .menu-item:hover,
+.sidebar--dark .menu-group-btn:hover {
+    background: rgba(255, 255, 255, .04) !important;
+}
+
+/* active = solid color (no gradient) */
+.sidebar--dark .menu-item.active {
+    background: #dabf84 !important;
+    /* solid orange */
+    color: #111827 !important;
+    box-shadow: none !important;
+}
+
+/* icons: simpler and more “flat” */
+.sidebar--dark .menu-ico {
+    background: rgba(255, 255, 255, .08) !important;
+    border-radius: 10px !important;
+}
+
+.sidebar--dark .menu-item.active .menu-ico {
+    background: rgba(17, 24, 39, .18) !important;
+}
+
+/* remove chevron rotation animation (keep toggle, but no rotation) */
+.sidebar--dark .menu-group-btn .mi-chevron {
+    transform: none !important;
+    opacity: .7 !important;
+}
+
+.sidebar--dark .menu-group.is-open .menu-group-btn .mi-chevron {
+    transform: none !important;
+}
+
+/* optional: tighter spacing / more “clean” */
+.sidebar--dark .sidebar-menu {
+    padding: 10px !important;
+}
+
+.sidebar--dark .menu-item,
+.sidebar--dark .menu-group-btn {
+    border-radius: 14px !important;
+    padding: 10px 12px !important;
+}

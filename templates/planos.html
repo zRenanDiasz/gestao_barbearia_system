@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Planos | Estetica Barbearia</title>
+
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="/static/css/planos.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <aside class="sidebar sidebar--dark">
+            <div class="sidebar-brand">
+                <div class="brand-icon" aria-hidden="true">✂</div>
+                <div class="brand-text">
+                    <div class="brand-title">Estetica Barbearia</div>
+                    <div class="brand-subtitle">DataraX</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu" id="sidebar-menu">
+                <a href="/agenda-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📅</span>
+                    <span>Agenda</span>
+                </a>
+
+                <div class="menu-group is-open" data-group="cadastros">
+                    <button type="button" class="menu-group-btn" data-toggle="menu-group" aria-expanded="true">
+                        <span class="menu-ico" aria-hidden="true">👤</span>
+                        <span>Cadastros</span>
+                        <span class="mi-chevron" aria-hidden="true">▾</span>
+                    </button>
+
+                    <div class="menu-sub">
+                        <a href="/clientes-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">👥</span>
+                            <span>Clientes</span>
+                        </a>
+                        <a href="/profissionais-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">🧑</span>
+                            <span>Profissionais</span>
+                        </a>
+                        <a href="/servicos-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">✂️</span>
+                            <span>Serviços</span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/planos-page" class="menu-item is-active">
+                    <span class="menu-ico" aria-hidden="true">🧾</span>
+                    <span>Planos</span>
+                </a>
+
+                <a href="/financeiro-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">$</span>
+                    <span>Financeiro</span>
+                </a>
+
+                <a href="/estoque-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📦</span>
+                    <span>Estoque</span>
+                </a>
+
+                <a href="/relatorios-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📊</span>
+                    <span>Relatórios</span>
+                </a>
+
+                <a href="/configuracoes-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">⚙️</span>
+                    <span>Configurações</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header planos-header">
+                <div>
+                    <h1 id="page-title">Planos</h1>
+                    <p id="page-subtitle">Combos e estatísticas de uso</p>
+                </div>
+            </header>
+
+            <section id="view-planos-lista">
+                <section class="planos-kpis">
+                    <div class="kpi-card kpi-card--icon">
+                        <div class="kpi-ico" aria-hidden="true">📦</div>
+                        <div>
+                            <span>Planos Ativos</span>
+                            <strong id="kpi-planos-ativos">0</strong>
+                            <small id="kpi-planos-ativos-sub">de 0 cadastrados</small>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card kpi-card--icon">
+                        <div class="kpi-ico" aria-hidden="true">👥</div>
+                        <div>
+                            <span>Clientes com Plano</span>
+                            <strong id="kpi-clientes-com-plano">0</strong>
+                            <small id="kpi-clientes-com-plano-sub">assinaturas ativas</small>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card kpi-card--icon">
+                        <div class="kpi-ico" aria-hidden="true">⏰</div>
+                        <div>
+                            <span>Próximos Vencimentos</span>
+                            <strong id="kpi-proximos-venc">0</strong>
+                            <small id="kpi-proximos-venc-sub">nos próximos 7 dias</small>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card kpi-card--icon">
+                        <div class="kpi-ico" aria-hidden="true">⭐</div>
+                        <div>
+                            <span>Plano Mais Popular</span>
+                            <strong id="kpi-plano-popular">—</strong>
+                            <small id="kpi-plano-popular-sub">0 clientes vinculados</small>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="planos-toolbar">
+                    <div class="planos-toolbar-left">
+                        <div class="search-box">
+                            <span class="sb-ico" aria-hidden="true">🔎</span>
+                            <input type="text" id="busca-planos" placeholder="Buscar planos..." />
+                        </div>
+                    </div>
+
+                    <div class="planos-toolbar-right">
+                        <select id="filtro-status-planos" class="select">
+                            <option value="">Todos os Status</option>
+                            <option value="ativo">Ativo</option>
+                            <option value="inativo">Inativo</option>
+                        </select>
+
+                        <button class="btn-primary btn-orange" id="btn-novo-plano" type="button">+ Novo Plano</button>
+                    </div>
+                </section>
+
+                <section class="planos-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome do Plano</th>
+                                <th>Serviços Inclusos</th>
+                                <th>Qtd. de Usos</th>
+                                <th>Valor</th>
+                                <th>Clientes</th>
+                                <th>Status</th>
+                                <th class="th-actions"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-planos"></tbody>
+                    </table>
+                </section>
+            </section>
+
+            <section id="view-plano-detalhe" class="hidden">
+                <div class="plano-topbar">
+                    <button class="btn-back" id="btn-voltar-planos" type="button">← Voltar</button>
+
+                    <div class="plano-heading">
+                        <div class="plano-title-row">
+                            <h2 id="det-plano-nome">Plano</h2>
+                            <span class="pill pill--success" id="det-plano-status">Ativo</span>
+                        </div>
+
+                        <p id="det-plano-sub">—</p>
+                    </div>
+                </div>
+
+                <section class="planos-toolbar planos-toolbar--clientes">
+                    <div class="planos-toolbar-left">
+                        <div class="search-box">
+                            <span class="sb-ico" aria-hidden="true">🔎</span>
+                            <input type="text" id="busca-clientes-plano" placeholder="Buscar cliente..." />
+                        </div>
+                    </div>
+
+                    <div class="planos-toolbar-right">
+                        <button class="btn-primary btn-orange" id="btn-vincular-cliente" type="button">
+                            <span aria-hidden="true">👤</span>
+                            Vincular Cliente
+                        </button>
+                    </div>
+                </section>
+
+                <section class="planos-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Data de Início</th>
+                                <th>Próximo Pagamento</th>
+                                <th>Usos Totais</th>
+                                <th>Usos Restantes</th>
+                                <th>Forma de Pagamento</th>
+                                <th>Status</th>
+                                <th class="th-actions"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-clientes-plano"></tbody>
+                    </table>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="modal-novo-plano">
+        <div class="modal-box modal-box--compact" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-plano">
+            <div class="modal-head modal-head--simple">
+                <div>
+                    <h2 id="titulo-modal-plano">Novo Plano</h2>
+                    <p>Cadastre um plano mensal para os clientes da barbearia</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-novo-plano" aria-label="Fechar">×</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-novo-plano" class="form-compact">
+                    <div class="form-row">
+                        <label for="pl-nome">Nome *</label>
+                        <input id="pl-nome" type="text" placeholder="Plano Básico" required />
+                    </div>
+
+                    <div class="form-row">
+                        <label>Serviços *</label>
+                        <div class="ms-wrap" id="ms-servicos">
+                            <div class="ms-input" id="ms-servicos-input" tabindex="0" role="button"
+                                aria-haspopup="listbox" aria-expanded="false">
+                                <div class="ms-chips" id="ms-servicos-chips">
+                                    <span class="ms-placeholder">Selecione serviços...</span>
+                                </div>
+                                <span class="ms-caret" aria-hidden="true">▾</span>
+                            </div>
+
+                            <div class="ms-dropdown hidden" id="ms-servicos-dropdown" role="listbox"
+                                aria-label="Serviços do plano">
+                                <div class="ms-search">
+                                    <span aria-hidden="true">🔎</span>
+                                    <input type="text" id="ms-servicos-busca" placeholder="Buscar serviço..." />
+                                </div>
+                                <div class="ms-list" id="ms-servicos-lista"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="pl-usos">Usos/mês *</label>
+                        <input id="pl-usos" type="number" min="1" step="1" placeholder="4" required />
+                    </div>
+
+                    <div class="form-row">
+                        <label for="pl-valor">Valor *</label>
+                        <input id="pl-valor" type="number" min="0" step="0.01" placeholder="280" required />
+                    </div>
+
+                    <div class="form-row">
+                        <label for="pl-descricao">Descrição</label>
+                        <input id="pl-descricao" type="text" placeholder="Descrição opcional..." />
+                    </div>
+
+                    <div class="form-row">
+                        <label for="pl-status">Status</label>
+                        <select id="pl-status">
+                            <option value="ativo" selected>Ativo</option>
+                            <option value="inativo">Inativo</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-foot modal-foot--compact">
+                <button type="button" class="btn-secondary" id="btn-cancelar-novo-plano">Cancelar</button>
+                <button type="submit" class="btn-primary btn-orange" form="form-novo-plano">Salvar Plano</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-vincular-cliente">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-vincular">
+            <div class="modal-head">
+                <div>
+                    <h2 id="titulo-modal-vincular">Vincular Cliente</h2>
+                    <p>Associe um cliente ao plano selecionado.</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-vincular" aria-label="Fechar">×</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-vincular-cliente" class="form-compact">
+                    <div class="form-row">
+                        <label for="vc-cliente">Cliente</label>
+                        <input type="text" id="vc-cliente-busca" placeholder="Digite nome ou telefone"
+                            autocomplete="off" />
+
+                        <div id="vc-cliente-resultados" class="dropdown-busca"></div>
+
+                        <input type="hidden" id="vc-cliente" />
+                    </div>
+
+                    <div class="form-row">
+                        <label for="vc-forma">Forma de Pagamento</label>
+                        <select id="vc-forma" required>
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="debito">Cartão Débito</option>
+                            <option value="pix">PIX</option>
+                            <option value="credito">Cartão Crédito</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="vc-status">Status inicial</label>
+                        <select id="vc-status" required>
+                            <option value="ativo">Ativo</option>
+                            <option value="aguardando_pagamento">Aguardando Pagamento</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-cancelar-vincular">Cancelar</button>
+                <button type="submit" class="btn-primary btn-orange" form="form-vincular-cliente">Vincular</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-renovar-cliente-plano">
+        <div class="modal-box modal-box--medium" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-renovar">
+            <div class="modal-head">
+                <div>
+                    <h2 id="titulo-modal-renovar">Renovar Plano</h2>
+                    <p>Defina o novo vencimento e a forma de pagamento.</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-renovar" aria-label="Fechar">×</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-renovar-cliente-plano" class="form-compact">
+                    <div class="form-row">
+                        <label for="rp-cliente">Cliente</label>
+                        <input id="rp-cliente" type="text" class="readonly-input" readonly />
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-row">
+                            <label for="rp-proximo-vencimento">Novo vencimento *</label>
+                            <input id="rp-proximo-vencimento" type="date" required />
+                        </div>
+
+                        <div class="form-row">
+                            <label for="rp-forma">Forma de pagamento *</label>
+                            <select id="rp-forma" required>
+                                <option value="dinheiro">Dinheiro</option>
+                                <option value="debito">Cartão Débito</option>
+                                <option value="pix">PIX</option>
+                                <option value="credito">Cartão Crédito</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-cancelar-renovar">Cancelar</button>
+                <button type="submit" class="btn-primary btn-orange" form="form-renovar-cliente-plano">Salvar
+                    Renovação</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-editar-cliente-plano">
+        <div class="modal-box modal-box--large" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-editar">
+            <div class="modal-head">
+                <div>
+                    <h2 id="titulo-modal-editar">Editar Cliente do Plano</h2>
+                    <p>Atualize os dados do vínculo do cliente com este plano.</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-editar" aria-label="Fechar">×</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-editar-cliente-plano" class="form-compact">
+                    <div class="form-row">
+                        <label for="ep-cliente">Cliente</label>
+                        <input id="ep-cliente" type="text" class="readonly-input" readonly />
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-row">
+                            <label for="ep-data-inicio">Data de início</label>
+                            <input id="ep-data-inicio" type="date" />
+                        </div>
+
+                        <div class="form-row">
+                            <label for="ep-proximo-vencimento">Próximo vencimento</label>
+                            <input id="ep-proximo-vencimento" type="date" />
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-row">
+                            <label for="ep-usos-totais">Usos totais</label>
+                            <input id="ep-usos-totais" type="number" min="0" step="1" />
+                        </div>
+
+                        <div class="form-row">
+                            <label for="ep-usos-restantes">Usos restantes</label>
+                            <input id="ep-usos-restantes" type="number" min="0" step="1" />
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-row">
+                            <label for="ep-forma">Forma de pagamento</label>
+                            <select id="ep-forma">
+                                <option value="">Selecione...</option>
+                                <option value="dinheiro">Dinheiro</option>
+                                <option value="debito">Cartão Débito</option>
+                                <option value="pix">PIX</option>
+                                <option value="credito">Cartão Crédito</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="ep-status">Status</label>
+                            <select id="ep-status">
+                                <option value="ativo">Ativo</option>
+                                <option value="aguardando_pagamento">Aguardando Pagamento</option>
+                                <option value="atrasado">Atrasado</option>
+                                <option value="cancelado">Cancelado</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-cancelar-editar">Cancelar</button>
+                <button type="submit" class="btn-primary btn-orange" form="form-editar-cliente-plano">Salvar
+                    Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar_user">
+        <span>@DataraX</span>
+        <small>Todos os direitos reservados</small>
+    </div>
+
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/ui.js"></script>
+    <script src="/static/js/planos.js"></script>
+</body>
+
+</html>

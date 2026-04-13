@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Financeiro | Estetica Barbearia</title>
+
+    <!-- Base styles (shared across screens) -->
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/layout.css">
+
+    <!-- Screen-specific styles -->
+    <link rel="stylesheet" href="/static/css/financeiro.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- =========================================
+             SIDEBAR (modern / same as Agenda)
+        ========================================== -->
+        <aside class="sidebar sidebar--dark">
+            <!-- Brand / Header -->
+            <div class="sidebar-brand">
+                <div class="brand-icon" aria-hidden="true">✂</div>
+                <div class="brand-text">
+                    <div class="brand-title">Estetica Barbearia</div>
+                    <div class="brand-subtitle">DataraX</div>
+                </div>
+            </div>
+
+            <!-- Menu -->
+            <nav class="sidebar-menu" id="sidebar-menu">
+                <a href="/agenda-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📅</span>
+                    <span>Agenda</span>
+                </a>
+
+                <!-- GROUP: Cadastros -->
+                <div class="menu-group" data-group="cadastros">
+                    <button type="button" class="menu-group-btn" data-toggle="menu-group" aria-expanded="true">
+                        <span class="menu-ico" aria-hidden="true">👤</span>
+                        <span>Cadastros</span>
+                        <span class="mi-chevron" aria-hidden="true">▾</span>
+                    </button>
+
+                    <div class="menu-sub">
+                        <a href="/clientes-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">👥</span>
+                            <span>Clientes</span>
+                        </a>
+                        <a href="/profissionais-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">🧑</span>
+                            <span>Profissionais</span>
+                        </a>
+                        <a href="/servicos-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">✂️</span>
+                            <span>Serviços</span>
+                        </a>
+
+                        <a href="/planos-page" class="menu-item">
+                            <span class="menu-ico" aria-hidden="true">🧾</span>
+                            <span>Planos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/financeiro-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">$</span>
+                    <span>Financeiro</span>
+                </a>
+
+                <a href="/estoque-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📦</span>
+                    <span>Estoque</span>
+                </a>
+
+                <a href="/relatorios-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📊</span>
+                    <span>Relatórios</span>
+                </a>
+
+                <a href="/configuracoes-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">⚙️</span>
+                    <span>Configurações</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- =========================================
+             MAIN CONTENT
+        ========================================== -->
+        <main class="main-content">
+
+            <!-- Header -->
+            <header class="page-header">
+                <div>
+                    <h1>Financeiro</h1>
+                    <p>Controle de receitas e despesas</p>
+                </div>
+
+                <div class="header-actions">
+                    <input type="text" placeholder="Buscar descrição..." class="search-input" id="busca">
+                </div>
+            </header>
+
+            <!-- Filters / Actions -->
+            <section class="fin-toolbar">
+                <div class="fin-left">
+                    <input type="date" id="filtro-data" class="date-input" />
+
+                    <!-- NOVO: período -->
+                    <select id="filtro-periodo">
+                        <option value="dia">Dia</option>
+                        <option value="semana">Semana</option>
+                    </select>
+
+                    <!-- NOVO: profissional -->
+                    <select id="filtro-profissional">
+                        <option value="">Todos os Profissionais</option>
+                    </select>
+
+                    <select id="filtro-tipo">
+                        <option value="">Todos os Tipos</option>
+                        <option value="entrada">Receita</option>
+                        <option value="saida">Despesa</option>
+                    </select>
+
+                    <select id="filtro-status">
+                        <option value="">Todos os Status</option>
+                        <option value="pago">Pago</option>
+                        <option value="pendente">Pendente</option>
+                    </select>
+                </div>
+
+                <div class="fin-right">
+                    <button class="btn-primary" id="btn-nova-transacao" type="button">+ Nova Transação</button>
+                </div>
+            </section>
+
+            <!-- KPIs -->
+            <section class="fin-kpis">
+                <div class="kpi-card">
+                    <span id="kpi-label-receita">Receita do Dia</span>
+                    <strong id="kpi-receita-dia">R$ 0,00</strong>
+                    <small id="kpi-receita-sub">—</small>
+                </div>
+
+                <div class="kpi-card">
+                    <span id="kpi-label-despesa">Despesas do Dia</span>
+                    <strong id="kpi-despesa-dia">R$ 0,00</strong>
+                    <small id="kpi-despesa-sub">—</small>
+                </div>
+
+                <div class="kpi-card">
+                    <span id="kpi-label-saldo">Saldo do Dia</span>
+                    <strong id="kpi-saldo-dia">R$ 0,00</strong>
+                    <small id="kpi-saldo-sub">—</small>
+                </div>
+
+                <div class="kpi-card">
+                    <span>Receita Mensal</span>
+                    <strong id="kpi-receita-mensal">R$ 0,00</strong>
+                    <small id="kpi-mensal-sub">—</small>
+                </div>
+            </section>
+
+            <!-- Payment breakdown (period entries only) -->
+            <section class="fin-payments">
+                <div class="pay-card">
+                    <span>Dinheiro</span>
+                    <strong id="kpi-dinheiro">R$ 0,00</strong>
+                    <small id="kpi-dinheiro-sub">—</small>
+                </div>
+
+                <div class="pay-card">
+                    <span>Cartão Débito</span>
+                    <strong id="kpi-debito">R$ 0,00</strong>
+                    <small id="kpi-debito-sub">—</small>
+                </div>
+
+                <div class="pay-card">
+                    <span>PIX</span>
+                    <strong id="kpi-pix">R$ 0,00</strong>
+                    <small id="kpi-pix-sub">—</small>
+                </div>
+
+                <div class="pay-card">
+                    <span>Cartão Crédito</span>
+                    <strong id="kpi-credito">R$ 0,00</strong>
+                    <small id="kpi-credito-sub">—</small>
+                </div>
+            </section>
+
+            <!-- Table -->
+            <section class="fin-table">
+                <div class="table-head">
+                    <h3>Transações Recentes</h3>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Descrição</th>
+                            <th>Tipo</th>
+                            <th>Pagamento</th>
+                            <th>Valor</th>
+                            <th>Comissão</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-transacoes"></tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- =========================================
+         MODAL: New transaction
+    ========================================== -->
+    <div class="modal-overlay" id="modal-transacao">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-transacao">
+
+            <div class="modal-head">
+                <div>
+                    <h2 id="titulo-modal-transacao">Nova Transação</h2>
+                    <p>Crie uma nova transação para o seu negócio.</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-transacao" aria-label="Fechar">×</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-transacao">
+
+                    <div class="form-line">
+                        <label for="tr-tipo">Tipo</label>
+                        <select id="tr-tipo" required>
+                            <option value="entrada">Receita</option>
+                            <option value="saida">Despesa</option>
+                        </select>
+                    </div>
+
+                    <div class="form-line">
+                        <label for="tr-data">Data</label>
+                        <input id="tr-data" type="date" required />
+                    </div>
+
+                    <div class="form-line full">
+                        <label for="tr-descricao">Descrição</label>
+                        <input id="tr-descricao" type="text" placeholder="Ex: Corte + Barba / Compra de produtos"
+                            required />
+                    </div>
+
+                    <div class="form-line full">
+                        <label for="tr-valor">Valor</label>
+                        <input id="tr-valor" type="number" step="0.01" min="0" placeholder="0,00" required />
+                    </div>
+
+                    <div class="form-line">
+                        <label for="tr-pagamento">Pagamento</label>
+                        <select id="tr-pagamento" required>
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="debito">Cartão Débito</option>
+                            <option value="pix">PIX</option>
+                            <option value="credito">Cartão Crédito</option>
+                            <option value="transferencia">Transferência</option>
+                        </select>
+                    </div>
+
+                    <div class="form-line">
+                        <label for="tr-status">Status</label>
+                        <select id="tr-status" required>
+                            <option value="pago">Pago</option>
+                            <option value="pendente">Pendente</option>
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-cancelar-transacao">Cancelar</button>
+                <button type="submit" class="btn-primary" form="form-transacao">Salvar</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="sidebar_user">
+        <span>@DataraX</span>
+        <small>Todos os direitos reservados</small>
+    </div>
+
+    <!-- JS -->
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/ui.js"></script>
+    <script src="/static/js/financeiro.js"></script>
+</body>
+
+</html>

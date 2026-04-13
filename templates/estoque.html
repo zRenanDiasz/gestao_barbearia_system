@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Estoque | Estetica Barbearia</title>
+
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="/static/css/estoque.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <aside class="sidebar sidebar--dark">
+            <div class="sidebar-brand">
+                <div class="brand-icon" aria-hidden="true">✂</div>
+                <div class="brand-text">
+                    <div class="brand-title">Estetica Barbearia</div>
+                    <div class="brand-subtitle">DataraX</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu" id="sidebar-menu">
+                <a href="/agenda-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📅</span>
+                    <span>Agenda</span>
+                </a>
+
+                <div class="menu-group" data-group="cadastros">
+                    <button type="button" class="menu-group-btn" data-toggle="menu-group" aria-expanded="true">
+                        <span class="menu-ico" aria-hidden="true">👤</span>
+                        <span>Cadastros</span>
+                        <span class="mi-chevron" aria-hidden="true">▾</span>
+                    </button>
+
+                    <div class="menu-sub">
+                        <a href="/clientes-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">👥</span>
+                            <span>Clientes</span>
+                        </a>
+                        <a href="/profissionais-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">🧑</span>
+                            <span>Profissionais</span>
+                        </a>
+                        <a href="/servicos-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">✂️</span>
+                            <span>Serviços</span>
+                        </a>
+
+                        <a href="/planos-page" class="menu-item">
+                            <span class="menu-ico" aria-hidden="true">🧾</span>
+                            <span>Planos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/financeiro-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">$</span>
+                    <span>Financeiro</span>
+                </a>
+
+                <a href="/estoque-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📦</span>
+                    <span>Estoque</span>
+                </a>
+
+                <a href="/relatorios-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📊</span>
+                    <span>Relatórios</span>
+                </a>
+
+                <a href="/configuracoes-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">⚙️</span>
+                    <span>Configurações</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+
+            <header class="page-header">
+                <div>
+                    <h1>Estoque</h1>
+                    <p>Controle de produtos e insumos</p>
+                </div>
+            </header>
+
+            <section class="estoque-topbar">
+                <div class="input-icon">
+                    <span class="icon">🔎</span>
+                    <input id="busca-produtos" type="text" placeholder="Buscar produtos..." />
+                </div>
+
+                <select id="filtro-categoria">
+                    <option value="">Todas as Categorias</option>
+                </select>
+
+                <select id="filtro-status">
+                    <option value="">Todos os Status</option>
+                    <option value="normal">Normal</option>
+                    <option value="baixo">Baixo</option>
+                    <option value="critico">Crítico</option>
+                </select>
+
+                <button class="btn-primary" id="btn-novo-produto-2" type="button">+ Novo Produto</button>
+            </section>
+
+            <section class="cards estoque-cards">
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Total de Produtos</span>
+                        <span class="kpi-icon">📦</span>
+                    </div>
+                    <strong id="kpi-total-produtos">0</strong>
+                    <small><span id="kpi-total-categorias">0</span> categorias</small>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Valor Total</span>
+                        <span class="kpi-icon">💰</span>
+                    </div>
+                    <strong id="kpi-valor-total">R$ 0,00</strong>
+                    <small>Valor de estoque</small>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Estoque Baixo</span>
+                        <span class="kpi-dot warning"></span>
+                    </div>
+                    <strong id="kpi-estoque-baixo">0</strong>
+                    <small class="warn">Atenção necessária</small>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Estoque Crítico</span>
+                        <span class="kpi-dot danger"></span>
+                    </div>
+                    <strong id="kpi-estoque-critico">0</strong>
+                    <small class="danger">Repor urgente</small>
+                </div>
+            </section>
+
+            <section class="estoque-alert" id="alert-critico" hidden>
+                <div class="alert-left">
+                    <span class="alert-ico">⚠️</span>
+                    <div>
+                        <h3>Produtos com estoque crítico</h3>
+                        <p id="alert-critico-msg">—</p>
+                    </div>
+                </div>
+                <button class="btn-outline" id="btn-ver-criticos" type="button">Ver Produtos</button>
+            </section>
+
+            <section class="table-section">
+                <table class="estoque-table">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Categoria</th>
+                            <th>Marca</th>
+                            <th>Estoque Atual</th>
+                            <th>Estoque Mín.</th>
+                            <th>Valor Custo</th>
+                            <th>Valor Venda</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-produtos"></tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="modal-produto">
+        <div class="modal-box" role="dialog" aria-modal="true">
+            <div class="modal-head">
+                <div>
+                    <h2 id="titulo-modal-produto">Novo Produto</h2>
+                    <p>Adicione um novo produto ao seu estoque.</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-produto">×</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-produto">
+                    <div class="form-line">
+                        <label>Nome</label>
+                        <input id="p-nome" type="text" placeholder="Nome do produto" required />
+                    </div>
+
+                    <div class="form-line">
+                        <label>Categoria</label>
+                        <input id="p-categoria" type="text" placeholder="Ex: Finalização" />
+                    </div>
+
+                    <div class="form-line">
+                        <label>Marca</label>
+                        <input id="p-marca" type="text" placeholder="Marca do produto" />
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-line">
+                            <label>Estoque Inicial</label>
+                            <input id="p-estoque-inicial" type="number" min="0" step="1" value="0" />
+                        </div>
+                        <div class="form-line">
+                            <label>Estoque Mínimo</label>
+                            <input id="p-estoque-minimo" type="number" min="0" step="1" value="0" />
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-line">
+                            <label>Valor Custo</label>
+                            <input id="p-preco-custo" type="number" min="0" step="0.01" value="0" />
+                        </div>
+                        <div class="form-line">
+                            <label>Valor Venda</label>
+                            <input id="p-preco-venda" type="number" min="0" step="0.01" value="0" />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-cancelar-produto">Cancelar</button>
+                <button type="submit" class="btn-primary" form="form-produto" id="btn-salvar-produto">
+                    Adicionar Produto
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-mov">
+        <div class="modal-box" role="dialog" aria-modal="true">
+            <div class="modal-head">
+                <div>
+                    <h2 id="titulo-modal-mov">Movimentação</h2>
+                    <p id="subtitulo-modal-mov">—</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-mov">×</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-mov">
+                    <div class="form-line">
+                        <label>Quantidade</label>
+                        <input id="m-quantidade" type="number" min="1" step="1" required />
+                    </div>
+
+                    <div class="form-line">
+                        <label>Descrição (opcional)</label>
+                        <input id="m-descricao" type="text" placeholder="Ex: Compra no fornecedor" />
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-line">
+                            <label id="m-label-forma">Forma de pagamento</label>
+                            <select id="m-forma-pagamento" required>
+                                <option value="dinheiro">Dinheiro</option>
+                                <option value="pix">PIX</option>
+                                <option value="debito">Débito</option>
+                                <option value="credito">Crédito</option>
+                            </select>
+                        </div>
+
+                        <div class="form-line">
+                            <label id="m-label-valor">Valor previsto</label>
+                            <input id="m-valor-previsto" type="text" value="R$ 0,00" readonly />
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-cancelar-mov">Cancelar</button>
+                <button type="submit" class="btn-primary" form="form-mov" id="btn-confirmar-mov">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar_user">
+        <span>@DataraX</span>
+        <small>Todos os direitos reservados</small>
+    </div>
+
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/estoque.js"></script>
+    <script src="/static/js/ui.js"></script>
+</body>
+
+</html>

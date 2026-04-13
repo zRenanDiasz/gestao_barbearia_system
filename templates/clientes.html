@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Clientes | Estetica Barbearia</title>
+
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="/static/css/clientes.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- SIDEBAR (padrão novo: dark + brand + ícones + id sidebar-menu) -->
+        <aside class="sidebar sidebar--dark">
+            <div class="sidebar-brand">
+                <div class="brand-icon" aria-hidden="true">✂</div>
+                <div class="brand-text">
+                    <div class="brand-title">Estetica Barbearia</div>
+                    <div class="brand-subtitle">DataraX</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu" id="sidebar-menu">
+                <a href="/agenda-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📅</span>
+                    <span>Agenda</span>
+                </a>
+
+                <!-- GROUP: Cadastros -->
+                <div class="menu-group" data-group="cadastros">
+                    <button type="button" class="menu-group-btn" data-toggle="menu-group" aria-expanded="false">
+                        <span class="menu-ico" aria-hidden="true">👤</span>
+                        <span>Cadastros</span>
+                        <span class="mi-chevron" aria-hidden="true">▾</span>
+                    </button>
+
+                    <div class="menu-sub">
+                        <a href="/clientes-page" class="menu-item sub-item active">
+                            <span class="menu-ico" aria-hidden="true">👥</span>
+                            <span>Clientes</span>
+                        </a>
+                        <a href="/profissionais-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">🧑</span>
+                            <span>Profissionais</span>
+                        </a>
+                        <a href="/servicos-page" class="menu-item sub-item">
+                            <span class="menu-ico" aria-hidden="true">✂️</span>
+                            <span>Serviços</span>
+                        </a>
+
+                        <a href="/planos-page" class="menu-item">
+                            <span class="menu-ico" aria-hidden="true">🧾</span>
+                            <span>Planos</span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="/financeiro-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">$</span>
+                    <span>Financeiro</span>
+                </a>
+
+                <a href="/estoque-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📦</span>
+                    <span>Estoque</span>
+                </a>
+
+                <a href="/relatorios-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">📊</span>
+                    <span>Relatórios</span>
+                </a>
+
+                <a href="/configuracoes-page" class="menu-item">
+                    <span class="menu-ico" aria-hidden="true">⚙️</span>
+                    <span>Configurações</span>
+                </a>
+            </nav>
+
+        </aside>
+
+        <!-- CONTEÚDO -->
+        <main class="main-content">
+
+            <!-- HEADER -->
+            <header class="page-header">
+                <div>
+                    <h1>Clientes</h1>
+                    <p>Cadastro e histórico de clientes</p>
+                </div>
+            </header>
+
+            <!-- TOPBAR -->
+            <section class="clientes-topbar">
+                <div class="input-icon">
+                    <span class="icon">🔎</span>
+                    <input id="busca-clientes" type="text" placeholder="Buscar clientes por nome ou telefone..." />
+                </div>
+
+                <select id="filtro-status">
+                    <option value="">Todos os Status</option>
+                    <option value="ativo">Ativo</option>
+                    <option value="inativo">Inativo</option>
+                </select>
+
+                <button class="btn-primary" id="btn-novo-cliente" type="button">+ Novo Cliente</button>
+            </section>
+
+            <!-- KPIs -->
+            <section class="cards clientes-cards">
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Total de Clientes</span>
+                        <span class="kpi-icon">👥</span>
+                    </div>
+                    <strong id="kpi-total-clientes">0</strong>
+                    <small>Cadastros</small>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Clientes Ativos</span>
+                        <span class="kpi-dot success"></span>
+                    </div>
+                    <strong id="kpi-ativos">0</strong>
+                    <small id="kpi-ativos-pct">—</small>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Novos Este Mês</span>
+                        <span class="kpi-dot info"></span>
+                    </div>
+                    <strong id="kpi-novos-mes">0</strong>
+                    <small>Cadastros</small>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">
+                        <span>Clientes Inativos</span>
+                        <span class="kpi-dot danger"></span>
+                    </div>
+                    <strong id="kpi-inativos">0</strong>
+                    <small>Sem visitas recentes</small>
+                </div>
+            </section>
+
+            <!-- TABELA -->
+            <section class="table-section">
+                <table class="clientes-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Contato</th>
+                            <th>Última Visita</th>
+                            <th>Total Visitas</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-clientes"></tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MODAL CLIENTE -->
+    <div class="modal-overlay" id="modal-cliente">
+        <div class="modal-box" role="dialog" aria-modal="true">
+            <div class="modal-head">
+                <div>
+                    <h2 id="titulo-modal-cliente">Novo Cliente</h2>
+                    <p id="subtitulo-modal-cliente">Preencha os dados para cadastrar.</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-cliente">×</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-cliente">
+                    <div class="form-line">
+                        <label for="c-nome">Nome</label>
+                        <input id="c-nome" type="text" placeholder="Nome do cliente" required />
+                    </div>
+
+                    <div class="form-line">
+                        <label for="c-telefone">Telefone</label>
+                        <input id="c-telefone" type="text" placeholder="(DD) 9xxxx-xxxx" required />
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-cancelar-cliente">Cancelar</button>
+                <button type="submit" class="btn-primary" form="form-cliente" id="btn-salvar-cliente">
+                    Adicionar Cliente
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CONFIRM (excluir) -->
+    <div class="modal-overlay" id="modal-confirm" aria-hidden="true">
+        <div class="modal-box modal-confirm-box" role="dialog" aria-modal="true">
+            <div class="modal-head">
+                <div>
+                    <h2 id="confirm-title">Confirmar ação</h2>
+                    <p id="confirm-msg">—</p>
+                </div>
+                <button type="button" class="modal-x" id="btn-fechar-confirm" aria-label="Fechar">×</button>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" class="btn-secondary" id="btn-confirm-nao">Cancelar</button>
+                <button type="button" class="btn-primary" id="btn-confirm-sim">Sim, excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar_user">
+        <span>@DataraX</span>
+        <small>Todos os direitos reservados</small>
+    </div>
+
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/clientes.js"></script>
+    <script src="/static/js/ui.js"></script>
+</body>
+
+</html>
